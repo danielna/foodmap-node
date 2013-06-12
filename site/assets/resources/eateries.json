@@ -219,7 +219,7 @@
     "description": "<h2>Pizza by the slice, $2-$3/slice</h2><p>The best pizza by the slice in NOVA.  Large selection to choose from, including pizzas that feign authenticity by including toppings like arugula and olive oil.  Large, crispy thin crust slices.  They have pastas and gelato and whatnot here, but why bother with that stuff when you could be eating more pizza?",
     "price": "low",
     "ethnicity": ["Italian"],
-    "tags": "Pizza",
+    "tags": ["Pizza"],
     "coordinates": 
         {
             "lng":  "-77.399673",
