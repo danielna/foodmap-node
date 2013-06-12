@@ -1,0 +1,57 @@
+@import "compass/css3";
+
+$color-black: #222222;
+$color-lightgray: #F2F2F2;
+$color-darkgray: #ADADAD;
+$color-green: #89E63B;
+$color-yellow: #FBF658;
+$color-red: #DD7663;
+$color-blue: #0095cd;
+
+$menu-left-transition-percentage: 15%;
+$menu-left-duration: 0.6s;
+$menu-bottom-duration: 0.4s;
+
+$top-bar-height: 5%;
+$menu-bottom-height: 10%;
+$menu-bottom-end-height: 15%;
+
+@mixin background-gradient($color1: #414141, $color2: #111111) {
+    background-color: $color1; // Old browsers
+    @include filter-gradient($color1, $color2, vertical); // IE6-8
+    $experimental-support-for-svg: true;
+    @include background-image(linear-gradient(top,$color1 0%,$color2 80%));
+}
+
+@mixin background-gradient-horiz($color1: #414141, $color2: #111111) {
+    background-color: $color1; // Old browsers
+    @include filter-gradient($color1, $color2, horizontal); // IE6-8
+    // $experimental-support-for-svg: true;
+    @include background-image(linear-gradient(left,$color1 0%,$color2 80%));
+}
+
+html { 
+    height: 100%;
+    font-family: Helvetica;
+}
+
+body { 
+    position: relative;
+    height: 100%; 
+    margin: 0; 
+    @include box-sizing(border-box);
+    background-color: $color-black;
+    color: $color-black;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.color-low {
+    color: $color-green;
+}
+.color-med {
+    color: $color-yellow;
+}
+.color-high {
+    color: $color-red;
+}

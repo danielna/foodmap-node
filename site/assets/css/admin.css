@@ -1,0 +1,104 @@
+/* line 33, ../sass/core.scss */
+html {
+  height: 100%;
+  font-family: Helvetica;
+}
+
+/* line 38, ../sass/core.scss */
+body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #222222;
+  color: #222222;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+/* line 49, ../sass/core.scss */
+.color-low {
+  color: #89e63b;
+}
+
+/* line 52, ../sass/core.scss */
+.color-med {
+  color: #fbf658;
+}
+
+/* line 55, ../sass/core.scss */
+.color-high {
+  color: #dd7663;
+}
+
+/* line 3, ../sass/admin.scss */
+.admin-eateries {
+  display: block;
+  position: relative;
+  width: 900px;
+  background-color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #adadad;
+}
+/* line 12, ../sass/admin.scss */
+.admin-eateries h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+/* line 15, ../sass/admin.scss */
+.admin-eateries h1.top {
+  margin-top: 0;
+}
+
+/* line 21, ../sass/admin.scss */
+.form, .eateries-list {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  border: 1px solid #adadad;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+/* line 29, ../sass/admin.scss */
+#add-listing div {
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+/* line 34, ../sass/admin.scss */
+#add-listing div.group {
+  margin-top: 5px;
+}
+/* line 36, ../sass/admin.scss */
+#add-listing div.group span {
+  display: block;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+/* line 42, ../sass/admin.scss */
+#add-listing div.group > div {
+  padding-left: 10px;
+}
+/* line 45, ../sass/admin.scss */
+#add-listing div.group label {
+  width: 140px;
+}
+/* line 50, ../sass/admin.scss */
+#add-listing label {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  font-weight: bold;
+}

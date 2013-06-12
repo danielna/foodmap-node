@@ -1,0 +1,34 @@
+/* line 33, ../sass/core.scss */
+html {
+  height: 100%;
+  font-family: Helvetica;
+}
+
+/* line 38, ../sass/core.scss */
+body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #222222;
+  color: #222222;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+/* line 49, ../sass/core.scss */
+.color-low {
+  color: #89e63b;
+}
+
+/* line 52, ../sass/core.scss */
+.color-med {
+  color: #fbf658;
+}
+
+/* line 55, ../sass/core.scss */
+.color-high {
+  color: #dd7663;
+}

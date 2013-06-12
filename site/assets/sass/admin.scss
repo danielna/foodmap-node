@@ -1,0 +1,56 @@
+@import "core";
+
+.admin-eateries {
+    display: block;
+    position: relative;
+    width: 900px;
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    @include box-sizing(border-box);
+    border: 2px solid $color-darkgray;
+    h1 {
+        text-align: center;
+        margin: 20px 0;
+        &.top {
+            margin-top: 0;
+        }
+    }
+}
+
+.form, .eateries-list {
+    @include box-sizing(border-box);
+    background-color: $color-lightgray;
+    border: 1px solid $color-darkgray;
+    margin-top: 10px;
+    padding: 20px;
+}
+#add-listing {
+    div {
+        display: block;
+        position: relative;
+        @include box-sizing(border-box);
+        margin-bottom: 10px;
+        &.group {
+            margin-top: 5px;
+            span {
+                display: block;
+                font-weight: bold;
+                font-style: italic;
+                margin-bottom: 5px;
+            }
+            > div {
+                padding-left: 10px;
+            }
+            label {
+                width: 140px;
+            }
+        }
+    }
+    label {
+        display: inline-block;
+        position: relative;
+        width: 150px;
+        font-weight: bold;
+    }
+}

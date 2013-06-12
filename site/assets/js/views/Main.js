@@ -13,7 +13,8 @@ define(["jquery", "backbone", "collections/MapItemList", "views/ListingContainer
                 "click #js-btn-welcome": "toggleWelcome",
                 "click #js-close-welcome": "toggleWelcome",
                 "click #js-btn-reset": "onReset",
-                "click #js-btn-menu": "toggleLeftMenu"
+                "click #js-btn-menu": "toggleLeftMenu",
+                "click #js-btn-admin": "redirectToAdmin"
             },
             
             initialize: function() {
@@ -86,6 +87,10 @@ define(["jquery", "backbone", "collections/MapItemList", "views/ListingContainer
             clickTag: function(id) {
                 var active_markers = this.map.filterMarkersByTag(id);
                 this.listingContainerView.filterListingsByArray(active_markers);
+            },
+
+            redirectToAdmin: function() {
+                window.location ="/admin.html";
             }
 
         });
