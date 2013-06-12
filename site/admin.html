@@ -49,9 +49,53 @@
         </section>
 
         <h1>List</h1>
-        <section class="eateries-list">    
-        </section>
+            <ul class="list">
+            </ul>
     </article>
+
+    <!-- *** templates *** -->
+
+    <!-- LISTING -->
+     <script type="text/template" id="template-admin-listing">
+        <div class="name">
+            <span class="label">Name:</span> 
+            <%= name %>
+        </div>
+        <div class="slide">
+            <div class="description">
+                <span class="label">Description:</span> 
+                <%= description %>
+            </div>
+            <div class="price">
+                <span class="label">Price:</span> 
+                <%= price %>
+            </div>
+            <div class="ethnicity">
+                <span class="label">Ethnicity:</span> 
+                <% for(var e in ethnicity) { %>
+                    <%= ethnicity[e] %>
+                <% } %>
+            </div>
+            <div class="tags">
+                <span class="label">Tags:</span>
+                <% for(var t in tags) { %>
+                    <%= tags[t] %>
+                <% } %>
+            </div>
+            <div class="lat">
+                <span class="label">Latitude:</span>
+                <%= coordinates.lat %>
+            </div>
+            <div class="lng">
+                <span class="label">Longitude:</span>
+                <%= coordinates.lng %>
+            </div>
+        </div>
+    </script>
+
+    <!-- *** end templates *** -->
+
+    <script data-main="/assets/js/foodmap.admin.init.js" src="assets/js/lib/require.js"></script>
 
 </body>
 </html>
