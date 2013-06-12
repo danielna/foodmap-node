@@ -1,5 +1,5 @@
 
-define(["jquery", "backbone", "foodmap.globals", "views/ListingView"],
+define(["jquery", "backbone", "foodmap.globals", "views/main/ListingView"],
     
     function($, Backbone, _globals, ListingView) {
 

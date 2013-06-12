@@ -20,7 +20,7 @@ require.config({
 });
 
 
-require( ["jquery", "underscore", "backbone", "views/Main" ],
+require( ["jquery", "underscore", "backbone", "views/main/Main" ],
     function($, _, Backbone, Main) {
 
         var foodmap = foodmap || {};
