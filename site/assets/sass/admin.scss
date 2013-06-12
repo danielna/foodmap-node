@@ -1,5 +1,10 @@
 @import "core";
 
+body {
+    height: auto;
+    overflow: auto;
+}
+
 .admin-eateries {
     display: block;
     position: relative;
@@ -52,5 +57,39 @@
         position: relative;
         width: 150px;
         font-weight: bold;
+    }
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+        display: block;
+        position: relative;
+        @include box-sizing(border-box);
+        padding: 10px;
+        font-size: 12px;
+        border: 1px solid black;
+        background-color: lighten($color-blue, 50%);
+        margin-bottom: 5px;
+        div {
+            display: block;
+            position: relative;
+            &.name {
+                font-size: 16px;
+            }
+            &.slide {
+                // display: none;
+            }
+            &.description h2 {
+                font-size: 14px;
+                margin: 5px 0;
+            }
+        }
+        .label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
     }
 }

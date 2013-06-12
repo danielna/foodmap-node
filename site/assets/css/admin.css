@@ -34,6 +34,12 @@ body {
 }
 
 /* line 3, ../sass/admin.scss */
+body {
+  height: auto;
+  overflow: auto;
+}
+
+/* line 8, ../sass/admin.scss */
 .admin-eateries {
   display: block;
   position: relative;
@@ -46,17 +52,17 @@ body {
   box-sizing: border-box;
   border: 2px solid #adadad;
 }
-/* line 12, ../sass/admin.scss */
+/* line 17, ../sass/admin.scss */
 .admin-eateries h1 {
   text-align: center;
   margin: 20px 0;
 }
-/* line 15, ../sass/admin.scss */
+/* line 20, ../sass/admin.scss */
 .admin-eateries h1.top {
   margin-top: 0;
 }
 
-/* line 21, ../sass/admin.scss */
+/* line 26, ../sass/admin.scss */
 .form, .eateries-list {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -67,7 +73,7 @@ body {
   padding: 20px;
 }
 
-/* line 29, ../sass/admin.scss */
+/* line 34, ../sass/admin.scss */
 #add-listing div {
   display: block;
   position: relative;
@@ -76,29 +82,68 @@ body {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
-/* line 34, ../sass/admin.scss */
+/* line 39, ../sass/admin.scss */
 #add-listing div.group {
   margin-top: 5px;
 }
-/* line 36, ../sass/admin.scss */
+/* line 41, ../sass/admin.scss */
 #add-listing div.group span {
   display: block;
   font-weight: bold;
   font-style: italic;
   margin-bottom: 5px;
 }
-/* line 42, ../sass/admin.scss */
+/* line 47, ../sass/admin.scss */
 #add-listing div.group > div {
   padding-left: 10px;
 }
-/* line 45, ../sass/admin.scss */
+/* line 50, ../sass/admin.scss */
 #add-listing div.group label {
   width: 140px;
 }
-/* line 50, ../sass/admin.scss */
+/* line 55, ../sass/admin.scss */
 #add-listing label {
   display: inline-block;
   position: relative;
   width: 150px;
   font-weight: bold;
+}
+
+/* line 63, ../sass/admin.scss */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* line 67, ../sass/admin.scss */
+.list li {
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid black;
+  background-color: #cdf1ff;
+  margin-bottom: 5px;
+}
+/* line 76, ../sass/admin.scss */
+.list li div {
+  display: block;
+  position: relative;
+}
+/* line 79, ../sass/admin.scss */
+.list li div.name {
+  font-size: 16px;
+}
+/* line 85, ../sass/admin.scss */
+.list li div.description h2 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+/* line 90, ../sass/admin.scss */
+.list li .label {
+  font-weight: bold;
+  margin-right: 10px;
 }
