@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="author" content="Daniel Na" />
+    <meta name="description" content="My map of favorite places to eat in Northern VA/MD/DC.">
+    <title>Notable NOVA Eateries</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/map.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:900italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+    <article id="left-container">
+        <h2>Filter by Tag</h2>
+        <ul id="container-tags" class="tags">
+            <!-- #template-tag -->
+        </ul>
+
+        <h2>Filter by Ethnicity</h2>
+        <ul id="container-ethnicities" class="tags">
+            <!-- #template-tag -->
+        </ul>
+
+
+    </article>
+
+    <article id="top-bar">
+        <button id="js-btn-menu" class="button gray" title="Filters">&laquo; Show</button>
+        <h1 class="page-title">Notable NOVA Eateries</h1>
+        <button id="js-btn-reset" class="button blue" title="Reset Map">Reset Map</button>
+        <button id="js-btn-welcome" class="button blue" title="Show welcome message">Welcome</button>
+        <span class="right">Last updated 6/2013 | Works best in Chrome/Safari</span>
+        <a class="header-link" href="http://blog.danielna.com/2013/03/12/where-to-eat-in-northern-va.html" title="Where to Eat in Northern Virginia" target="_blank">What the heck is this?!</a>
+    </article>
+
+
+    <article id="container-map">
+    </article>
+
+
+
+    <article id="bottom-container">
+        <div class="listing-scroll">
+            <div class="js-listing-container listing-container">
+                <!-- #template-listing -->
+            </div>
+        </div>
+    </article>
+
+
+
+    <div id="container-welcome">
+        <span id="js-close-welcome" title="Close this message">
+            close
+        </span>
+        <p>
+            Applicable demographic information that will help to explain the selection of eateries on this map:
+        </p>
+        <ul>
+            <li>20-something</li>
+            <li>Employed full-time</li>
+            <li>Asian descent</li>
+            <li>Will pay for quality, but rarely over $30</li>
+            <li>Otherwise, cheap eats are preferred almost always</li>
+            <li>Partial to ethnic eateries</li>
+        </ul>
+        <p>Color scheme:</p>
+        <ul>
+            <li><span class="color-low">Green</span>: Cheap (<= $10)</li>
+            <li><span class="color-med">Yellow</span>: Medium ($10 < $ <= $25)</li>
+            <li><span class="color-high">Red</span>: Expensive (> $25)</li>
+        </ul>
+        <p>
+            Within the color scheme the restaurants are generally ordered by preference. I'm also intentionally omitting most common food chains, which is why Red Robin is not on this list.  But I've got love for Red Robin.
+        </p>
+        <p>
+            Current best restaurants are denoted by a <img style="vertical-align: middle;" src="assets/img/star.png" title="Star"/>.
+        </p>
+        <p>
+            There will be rolling updates to this list.
+        </p>
+    </div>
+
+
+
+    <!-- *** templates *** -->
+
+    <!-- LISTING -->
+     <script type="text/template" id="template-listing">
+        <div class="metadata">
+            <div class="title"><%= name %></div>
+            <div class="price" data-price="<%= price %>"><%= price_map %></div>
+        </div>
+        <% if (tags.indexOf("BestOf") > -1) { %>
+            <img class="best-of" src="assets/img/star.png"/>
+        <% } %>
+    </script>
+
+    <!-- TAG -->
+    <script type="text/template" id="template-tag">
+        <% for(var i=0; i<tags.length; i++){ %>
+        <li class='button tag' title='<%= tags[i] %>' data-id='<%= tags[i] %>'><%= tags[i] %></li>
+        <% } %>
+    </script>
+
+    <!-- *** end templates *** -->
+
+
+    
+    
+    <script data-main="/assets/js/foodmap.init.js" src="/assets/js/lib/require.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiA6472v_0VZUQjmVvXQ4peWbFZsUcpVc&sensor=false"></script>
+    
+    <!-- javascript
+    <script type="text/javascript" src="assets/js/lib/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/underscore.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/backbone.min.js"></script>
+    
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiA6472v_0VZUQjmVvXQ4peWbFZsUcpVc&sensor=false"></script>
+    <script type="text/javascript" src="assets/js/lib/infobox.packed.js"></script>
+    
+    <script type="text/javascript" src="assets/js/foodmap.globals.js"></script>
+    <script type="text/javascript" src="assets/js/models/MapItem.js"></script>
+    <script type="text/javascript" src="assets/js/collections/MapItemList.js"></script>
+    <script type="text/javascript" src="assets/js/views/ListingContainerView.js"></script>
+    <script type="text/javascript" src="assets/js/views/ListingView.js"></script>
+    <script type="text/javascript" src="assets/js/views/TagsView.js"></script>
+    <script type="text/javascript" src="assets/js/views/MapView.js"></script>
+    <script type="text/javascript" src="assets/js/views/Main.js"></script>
+    <script type="text/javascript" src="assets/js/foodmap.init.js"></script>
+    -->
+
+    <!--
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-38929037-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script> 
+    -->
+
+</body>
+</html>
