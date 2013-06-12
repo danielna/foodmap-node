@@ -26,9 +26,7 @@ define(["jquery", "backbone", "models/MapItem"],
 
             // Pluck a collection property, returning an array of properties that do not include empty strings
             pluckCollectionProperty: function(property) {
-                var properties = _.chain(this.pluck(property)).map(function(s){
-                    return s.split(",");
-                });
+                var properties = _.chain(this.pluck(property));
 
                 var flattened = properties.flatten().map(function(s){
                     return s.trim();
