@@ -3,10 +3,10 @@
 require.config({
     baseUrl: "/assets/js", // generally the same directory as the script used in a data-main attribute for the top level script
     paths: {
-        'underscore': '/assets/js/lib/underscore.min',
-        'backbone': '/assets/js/lib/backbone.min',
-        'jquery': '/assets/js/lib/jquery-1.10.1.min',
-        'infobox': '/assets/js/lib/infobox.packed'
+        'underscore': 'lib/underscore.min',
+        'backbone': 'lib/backbone.min',
+        'jquery': 'lib/jquery-1.10.1.min',
+        'infobox': 'lib/infobox.packed'
     }, // set up custom paths to libraries, or paths to RequireJS plugins
     shim: {
         'underscore': {
