@@ -76,7 +76,7 @@
     "description": "<h2>Burgers, $10-$15</h2><p>The best burger in NOVA.  This place should supplant the completely underwhelming \"Ben's Chili Bowl\" as the iconic DC-area eatery. Lots of options and you won't leave hungry.  Other notes: (1) Parking here is terrible.  You'll probably wait for a spot. (2) Sweet potato fries. 'Nuff said.  (3) The au poivre burger will make peppercorns get stuck in your teeth.</p><p><em>Note (3/1/2013):</e> Word on the street is that RHB is closed indefinitely due to a landlord dispute.  So lame.</p></p>",
     "price": "high",
     "ethnicity": ["American"],
-    "tags": ["Burgers, BestOf"],
+    "tags": ["Burgers", "BestOf"],
     "coordinates": 
         {
             "lng":  "-77.078789",
