@@ -13,8 +13,6 @@ define(["jquery", "backbone"],
 
             render: function() {
                 this.$el.html( this.template( this.model.toJSON() ));
-
-                console.log("this.model.toJSON:", this.model.toJSON());
                 this.$el.attr("data-id", this.model.get("_id"));
 
                 return this;

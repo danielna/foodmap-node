@@ -15,32 +15,38 @@
         <section class="form">
             <form id="add-listing" action="#">
                 <div>
-                    <label for="name">Name:</label><input type="text" id="name"/>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name"/>
                 </div>
                 <div>
-                    <label for="description">Description:</label><textarea id="name"></textarea>
+                    <label for="description">Description:</label>
+                    <textarea name="description" id="description"></textarea>
                 </div>
                 <div>
                     <label for="price">Price:</label>
-                    <select id="price">
+                    <select id="price" name="price">
                         <option value="low">Low</option>
                         <option value="med">Medium</option>
                         <option value="high">High</option>
                     </select>
                 </div>
                 <div>
-                    <label for="ethnicity">Ethnicity:</label><input type="text" id="ethnicity"/>
+                    <label for="ethnicity">Ethnicity:</label>
+                    <input type="text" name="ethnicity" id="ethnicity"/>
                 </div>
                 <div>
-                    <label for="tags">Tags:</label><input type="text" id="tags"/>
+                    <label for="tags">Tags:</label>
+                    <input type="text" name="tags" id="tags"/>
                 </div>
                 <div class="group">
                     <span>Coordinates</span>
                     <div>
-                        <label for="lat">Latitude:</label><input type="text" id="lat"/>
+                        <label for="lat">Latitude:</label>
+                        <input type="text" id="lat" name="lat"/>
                     </div>
                     <div>
-                        <label for="lng">Longitude:</label><input type="text" id="lng"/>
+                        <label for="lng">Longitude:</label>
+                        <input type="text" id="lng" name="lng"/>
                     </div>
                 </div>
                 <input type="submit" id="submit"></input>

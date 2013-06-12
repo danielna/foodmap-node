@@ -25,6 +25,107 @@ app.configure( function() {
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+// Routes
+app.get( '/api', function( request, response ) {
+    response.send( 'Library API is running' );
+});
+
+
+
+// MONGOOSE
+
+//Connect to db using mongoose
+mongoose.connect( 'mongodb://localhost/foodmap_db' );
+
+// Schema(s)
+var ListingSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+    price: String,
+    ethnicity: [String],
+    tags: [String],
+    coordinates: { lat: String, lng: String}
+});
+
+// Models
+var ListingModel = mongoose.model( 'Listing', ListingSchema );
+
+// REST
+
+// Get a list of all listings
+app.get( '/api/listings', function( request, response ) {
+    return ListingModel.find( function( err, listings ) {
+        if( !err ) {
+            return response.send( listings );
+        } else {
+            return console.log( err );
+        }
+    });
+});
+
+//Get a single listing by id
+app.get( '/api/listings/:id', function( request, response ) {
+    return ListingModel.findById( request.params.id, function( err, listing ) {
+        if( !err ) {
+            return response.send( listing );
+        } else {
+            return console.log( err );
+        }
+    });
+});
+
+// Insert a new listing
+app.post( '/api/listings', function( request, response ) {
+
+    console.log("request.body:", request.body);
+
+    var listing = new ListingModel({
+        name: request.body.name,
+        description: request.body.description,
+        price: request.body.price,
+        ethnicity: request.body.ethnicity,
+        tags: request.body.tags,
+        coordinates: {
+            lat: request.body.lat, 
+            lng: request.body.lng
+        }
+    });
+
+    console.log("listing:", listing);
+    
+    listing.save( function( err ) {
+        if( !err ) {
+            return console.log( 'Created listing!' );
+        } else {
+            return console.log( err );
+        }
+    });
+    return response.send( listing );
+});
+
+// Update a listing
+app.put( '/api/listings', function( request, response ) {
+    console.log( 'Updating listing ' + request.body.name );
+    return ListingModel.findById( request.params.id, function( err, listing ) {
+        listing.name = request.body.name,
+        listing.description = request.body.description,
+        listing.price = request.body.price,
+        listing.ethnicity = request.body.ethnicity,
+        listing.tags = request.body.tags,
+        listing.coordinates.lat = request.body.lat, 
+        listing.coordinates.lng = request.body.lng;
+
+        return listing.save( function( err ) {
+            if( !err ) {
+                return console.log( 'Updated listing!' );
+            } else {
+                return console.log( err );
+            }
+        });
+    });
+});
+
+
 //Start server
 var port = 4711;
 app.listen( port, function() {

@@ -8,7 +8,8 @@ define(["jquery", "backbone", "models/MapItem"],
 
             model: MapItem,
 
-            url: "/assets/resources/eateries.json",
+            // url: "/assets/resources/eateries.json",
+            url: '/api/listings',
 
             initialize: function() {
                 // console.log("collection init");

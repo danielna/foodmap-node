@@ -13,6 +13,7 @@ define(["jquery", "backbone", "views/admin/AdminListing"],
 
             initialize: function() {
                 this.collection.bind("reset", _.bind(this.render, this));
+                this.listenTo( this.collection, 'add', this.render );
             },
 
             render: function() {
