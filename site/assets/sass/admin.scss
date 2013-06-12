@@ -36,6 +36,13 @@ body {
         position: relative;
         @include box-sizing(border-box);
         margin-bottom: 10px;
+        input, textarea {
+            width: 500px;
+        }
+        textarea {
+            height: 200px;
+        }
+        
         &.group {
             margin-top: 5px;
             span {
