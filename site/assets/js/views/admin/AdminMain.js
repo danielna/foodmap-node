@@ -38,9 +38,7 @@ define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListV
             },
 
             resetView: function() {
-                alert("Reset!");
                 this.$form[0].reset();
-                this.collection.trigger("reset");
             }
 
         });
