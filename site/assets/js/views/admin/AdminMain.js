@@ -17,10 +17,12 @@ define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListV
                 this.$body = this.$el;
                 this.$form = this.$el.find("#add-listing");
 
-                foodmap.MapList = new MapItemList();
-                this.adminListView = new AdminListView({ collection: foodmap.MapList }),
+                this.collection = new MapItemList();
+                this.adminListView = new AdminListView({ collection: this.collection }),
 
-                foodmap.MapList.fetch({reset: true});
+                this.collection.fetch({reset: true});
+
+                this.listenTo( this.collection, 'add', this.resetView );
             },
 
             addListing: function(e) {
@@ -32,7 +34,13 @@ define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListV
                     formData[data.name] = data.value;
                 });
                 
-                foodmap.MapList.create( formData );
+                this.collection.create( formData );
+            },
+
+            resetView: function() {
+                alert("Reset!");
+                this.$form[0].reset();
+                this.collection.trigger("reset");
             }
 
         });
