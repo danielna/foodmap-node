@@ -77,21 +77,30 @@ app.get( '/api/listings/:id', function( request, response ) {
 // Insert a new listing
 app.post( '/api/listings', function( request, response ) {
 
-    console.log("request.body:", request.body);
+    var ethnicity = [],
+        tags = [],    
+        req_e = request.body.ethnicity.split(","),
+        req_t = request.body.tags.split(",");
+
+    for (var e in req_e) {
+        ethnicity.push((req_e[e]).trim());
+    }
+
+    for (var t in req_t) {
+        tags.push((req_t[t]).trim());
+    }
 
     var listing = new ListingModel({
         name: request.body.name,
         description: request.body.description,
         price: request.body.price,
-        ethnicity: request.body.ethnicity,
-        tags: request.body.tags,
+        ethnicity: ethnicity,
+        tags: tags,
         coordinates: {
             lat: request.body.lat, 
             lng: request.body.lng
         }
     });
-
-    console.log("listing:", listing);
     
     listing.save( function( err ) {
         if( !err ) {
@@ -119,7 +128,7 @@ app.put( '/api/listings', function( request, response ) {
             if( !err ) {
                 return console.log( 'Updated listing!' );
             } else {
-                return console.log( err );
+                return console.log( "ERROR: " + err );
             }
         });
     });
