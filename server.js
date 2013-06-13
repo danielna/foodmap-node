@@ -44,7 +44,9 @@ var ListingSchema = new mongoose.Schema({
     price: String,
     ethnicity: [String],
     tags: [String],
-    coordinates: { lat: String, lng: String}
+    coordinates: { lat: String, lng: String},
+    created: { type: Date, default: Date.now },
+    modified: { type: Date, default: Date.now }
 });
 
 // Models
@@ -77,34 +79,21 @@ app.get( '/api/listings/:id', function( request, response ) {
 // Insert a new listing
 app.post( '/api/listings', function( request, response ) {
 
-    var ethnicity = [],
-        tags = [],    
-        req_e = request.body.ethnicity.split(","),
-        req_t = request.body.tags.split(",");
-
-    for (var e in req_e) {
-        ethnicity.push((req_e[e]).trim());
-    }
-
-    for (var t in req_t) {
-        tags.push((req_t[t]).trim());
-    }
-
     var listing = new ListingModel({
         name: request.body.name,
         description: request.body.description,
         price: request.body.price,
-        ethnicity: ethnicity,
-        tags: tags,
+        ethnicity: request.body.ethnicity,
+        tags: request.body.tags,
         coordinates: {
             lat: request.body.lat, 
             lng: request.body.lng
         }
     });
-    
+
     listing.save( function( err ) {
         if( !err ) {
-            return console.log( 'Created listing!' );
+            return console.log( 'Created listing: request.body.name' );
         } else {
             return console.log( err );
         }

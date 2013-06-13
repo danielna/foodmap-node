@@ -42,8 +42,35 @@ define(["jquery", "backbone", "models/MapItem"],
 
             // Sort by original insertion order
             comparator: function( mapItem ) {
-                return mapItem.get("order");
+                return mapItem.get("created");
+            },
+
+            // Sort collection by a date property
+            // @param dateProperty: "created" or "modified" right now
+            // @param desc: Sort direction boolean. Ascending by default.
+            sortByDateProperty: function(dateProperty, desc) {
+                var sorted = this.sortBy(function(mapItem) { 
+                    var date = new Date(mapItem.get(dateProperty));
+                    return -date.getTime(); 
+                });
+
+                if (desc) {
+                    return sorted.reverse();
+                }
+                return sorted;
+            },
+
+            sortByAlpha: function(desc){
+                var sorted = this.sortBy(function(mapItem){
+                    return mapItem.get("name");
+                });
+
+                if (desc) {
+                    return sorted.reverse();
+                }
+                return sorted;
             }
+
         });
 
     return foodmap.MapItemList;

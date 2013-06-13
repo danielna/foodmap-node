@@ -54,7 +54,12 @@
             </form>
         </section>
 
-        <h1>List</h1>
+        <h1>List [Count: <span class="count"></span>]</h1>
+        <div class="container-filters">
+            <a href="#" class="filter date-modified">Sort by Modified Date</a> | 
+            <a href="#" class="filter date-created">Sort by Created Date</a> |
+            <a href="#" class="filter alpha">Sort Alphabetically</a>
+        </div>
             <ul class="list">
             </ul>
     </article>
@@ -95,6 +100,14 @@
             <div class="lng">
                 <span class="label">Longitude:</span>
                 <%= coordinates.lng %>
+            </div>
+            <div class="created">
+                <span class="label">Created:</span>
+                <%= created %>
+            </div>
+            <div class="modified">
+                <span class="label">Modified:</span>
+                <%= modified %>
             </div>
         </div>
     </script>
