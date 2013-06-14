@@ -49,6 +49,7 @@
                         <input type="text" id="lng" name="lng"/>
                     </div>
                 </div>
+                <input type="hidden" name="created" value=""></input>
                 <input type="submit" id="submit"></input>
 
             </form>
@@ -56,9 +57,9 @@
 
         <h1>List [Count: <span class="count"></span>]</h1>
         <div class="container-filters">
-            <a href="#" class="filter date-modified">Sort by Modified Date</a> | 
-            <a href="#" class="filter date-created">Sort by Created Date</a> |
-            <a href="#" class="filter alpha">Sort Alphabetically</a>
+            <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> | 
+            <a href="javascript:;" class="filter date-created">Sort by Created Date</a> |
+            <a href="javascript:;" class="filter alpha">Sort Alphabetically</a>
         </div>
             <ul class="list">
             </ul>
@@ -68,6 +69,10 @@
 
     <!-- LISTING -->
      <script type="text/template" id="template-admin-listing">
+        <div class="options">
+            <a href="javascript:;" data-id="<%=id%>" class="model-edit">Edit</a> | 
+            <a href="javascript:;" data-id="<%=id%>" class="model-delete">Delete</a>
+        </div>
         <div class="name">
             <span class="label">Name:</span> 
             <%= name %>

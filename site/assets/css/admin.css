@@ -144,14 +144,20 @@ body {
 /* line 86, ../sass/admin.scss */
 .list li div.name {
   font-size: 16px;
+  display: inline-block;
 }
-/* line 92, ../sass/admin.scss */
+/* line 93, ../sass/admin.scss */
 .list li div.description h2 {
   font-size: 14px;
   margin: 5px 0;
 }
-/* line 97, ../sass/admin.scss */
+/* line 98, ../sass/admin.scss */
 .list li .label {
   font-weight: bold;
   margin-right: 10px;
+}
+
+/* line 105, ../sass/admin.scss */
+.options {
+  float: right;
 }

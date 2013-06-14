@@ -85,6 +85,7 @@ body {
             position: relative;
             &.name {
                 font-size: 16px;
+                display: inline-block;
             }
             &.slide {
                 // display: none;
@@ -99,4 +100,8 @@ body {
             margin-right: 10px;
         }
     }
+}
+
+.options {
+    float: right;
 }
