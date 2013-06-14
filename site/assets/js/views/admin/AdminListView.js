@@ -9,7 +9,10 @@ define(["jquery", "backbone", "views/admin/AdminListing"],
 
             el: "ul.list",
 
-            events: {},
+            events: {
+                "click .model-edit": "editListing",
+                "click .model-delete": "deleteListing"
+            },
 
             initialize: function() {
                 this.collection.bind("reset", _.bind(this.render, this));
@@ -58,6 +61,24 @@ define(["jquery", "backbone", "views/admin/AdminListing"],
                     
                     this.$el.append( adminListing.render().el );
                 }, this);
+            },
+
+            editListing: function(e){
+                e.preventDefault();
+
+                var $this = $(event.currentTarget),
+                    id = $this.attr("data-id");
+                
+                this.trigger("editListing", id);
+            },
+
+            deleteListing: function(e){
+                e.preventDefault();
+
+                var $this = $(event.currentTarget),
+                    id = $this.attr("data-id");
+                
+                this.trigger("deleteListing", id);
             }
 
         });
