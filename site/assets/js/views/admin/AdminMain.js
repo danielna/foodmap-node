@@ -61,26 +61,17 @@ define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListV
                 this.$count.text(this.collection.length);
             },
 
+            // Parse the class of the link to determine how to sort the view
+            // Todo: I don't like how coupled the markup and functionality are here.
             filterListHandler: function(ev) {
                 ev.preventDefault();
 
                 var $link = $(ev.currentTarget),
-                    asc = true,
                     className = $link.attr("class").replace("filter ", "");
+                className = (className.indexOf("-desc") < 0) ? className + "-desc" : className.substring(0, className.length - 5);
                 
-                if (!$link.hasClass("asc")){
-                    asc = false;
-                }
-
-                if (!asc) {
-                    className = className + "-desc";
-                }
-
-                
-
+                $link.attr("class", "filter " + className);
                 this.adminListView.renderFiltered(className);           
-
-                $link.toggleClass("asc");
             }
 
         });

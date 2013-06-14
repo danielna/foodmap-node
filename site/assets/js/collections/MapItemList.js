@@ -47,7 +47,7 @@ define(["jquery", "backbone", "models/MapItem"],
 
             // Sort collection by a date property
             // @param dateProperty: "created" or "modified" right now
-            // @param desc: Sort direction boolean. Ascending by default.
+            // @param desc: Sort direction boolean. Ascending is true, descending is false.
             sortByDateProperty: function(dateProperty, desc) {
                 var sorted = this.sortBy(function(mapItem) { 
                     var date = new Date(mapItem.get(dateProperty));
