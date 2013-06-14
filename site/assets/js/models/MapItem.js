@@ -14,10 +14,15 @@ define(["jquery", "backbone"],
                 "ethnicity": "",
                 "tags": "",
                 "coordinates": ""
+            },
+
+            parse: function( response ) {
+                response.id = response._id;
+                return response;
             }
 
         });
-
+ 
         return foodmap.MapItem;
     }
 );
