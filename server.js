@@ -93,7 +93,7 @@ app.post( '/api/listings', function( request, response ) {
 
     listing.save( function( err ) {
         if( !err ) {
-            return console.log( 'Created listing: request.body.name' );
+            return console.log( 'Created listing: ' + request.body.name );
         } else {
             return console.log( err );
         }
@@ -111,13 +111,29 @@ app.put( '/api/listings', function( request, response ) {
         listing.ethnicity = request.body.ethnicity,
         listing.tags = request.body.tags,
         listing.coordinates.lat = request.body.lat, 
-        listing.coordinates.lng = request.body.lng;
+        listing.coordinates.lng = request.body.lng,
+        listing.modified = request.body.modified;
 
         return listing.save( function( err ) {
             if( !err ) {
-                return console.log( 'Updated listing!' );
+                return console.log( 'Updated listing: ' + request.body.name );
             } else {
                 return console.log( "ERROR: " + err );
+            }
+        });
+    });
+});
+
+// Delete a listing
+app.delete( '/api/listings/:id', function( request, response ) {
+    console.log( 'Deleting listing with id: ' + request.params.id );
+    return ListingModel.findById( request.params.id, function( err, listing ) {
+        return listing.remove( function( err ) {
+            if( !err ) {
+                console.log( 'Listing removed: ' + request.body.name );
+                return response.send( '' );
+            } else {
+                console.log( err );
             }
         });
     });
