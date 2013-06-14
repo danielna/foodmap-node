@@ -41,9 +41,9 @@ define(["jquery", "backbone", "models/MapItem"],
             },
 
             // Sort by original insertion order
-            comparator: function( mapItem ) {
-                return mapItem.get("created");
-            },
+            // comparator: function( mapItem ) {
+            //     return mapItem.get("created");
+            // },
 
             // Sort collection by a date property
             // @param dateProperty: "created" or "modified" right now
