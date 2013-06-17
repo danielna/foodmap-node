@@ -26,13 +26,13 @@ define('gmaps', ['async!http://maps.googleapis.com/maps/api/js?key=AIzaSyDiA6472
 });
 
 
-require(["jquery", "underscore", "backbone", "views/main/Main", "gmaps"], function($, _, Backbone, Main) {
+require(["jquery", "underscore", "backbone", "router", "gmaps"],
+    function($, _, Backbone, Router) {
 
-    var foodmap = foodmap || {};
+        var foodmap = foodmap || {};
 
-    $(function() {
-
-        new Main();
-
-    });
-});
+        $(function() {
+            new Router();
+        });
+    }
+);
