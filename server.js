@@ -78,6 +78,7 @@ app.get( '/api/listings/:id', function( request, response ) {
 
 // Insert a new listing
 app.post( '/api/listings', function( request, response ) {
+    var date = new Date();
 
     var listing = new ListingModel({
         name: request.body.name,
@@ -88,7 +89,9 @@ app.post( '/api/listings', function( request, response ) {
         coordinates: {
             lat: request.body.lat,
             lng: request.body.lng
-        }
+        },
+        created: date,
+        modified: date
     });
 
     listing.save( function( err ) {
