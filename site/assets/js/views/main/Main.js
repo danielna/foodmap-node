@@ -103,7 +103,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         },
 
         redirectToAdmin: function() {
-            window.location = "/admin.html";
+            window.location = "#admin";
         }
 
     });
