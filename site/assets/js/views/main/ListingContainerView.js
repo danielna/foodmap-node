@@ -1,103 +1,105 @@
-
 define(["jquery", "backbone", "foodmap.globals", "views/main/ListingView"],
-    
-    function($, Backbone, _globals, ListingView) {
 
-        var foodmap = foodmap || {};
+function($, Backbone, _globals, ListingView) {
 
-        foodmap.ListingContainerView = Backbone.View.extend({
+    var foodmap = foodmap || {};
 
-            el: ".js-listing-container",
+    foodmap.ListingContainerView = Backbone.View.extend({
 
-            events: {
-                ".listing click": "clickListing"
-            },
+        el: ".js-listing-container",
 
-            initialize: function() {
-                this.collection.bind("reset", _.bind(this.render, this));
-                this.collection.bind("reset", _.bind(this.setListingContainerWidth, this));  
+        events: {
+            ".listing click": "clickListing"
+        },
 
-                this.isAnimating = false;
-            },
+        initialize: function() {
+            this.collection.bind("reset", _.bind(this.render, this));
+            this.collection.bind("reset", _.bind(this.setListingContainerWidth, this));
 
-            render: function() {
-                var _this = this;
-                this.collection.each( function(listing) {
-                    this.renderListing(listing);
-                }, this);
+            this.isAnimating = false;
+        },
 
-                this.$listings = this.$el.find(".listing");
-            },
+        render: function() {
+            var _this = this;
+            this.collection.each(function(listing) {
+                this.renderListing(listing);
+            }, this);
 
-            renderListing: function(listing) {
-                var listingView = new ListingView({
-                        model: listing
-                    }),
-                    listing_el = listingView.render().el,
-                    _this = this;
+            this.$listings = this.$el.find(".listing");
+        },
 
-                this.$el.append( listing_el );
+        renderListing: function(listing) {
+            var listingView = new ListingView({
+                model: listing
+            }),
+                listing_el = listingView.render().el,
+                _this = this;
 
-                var $self = $(listing_el),
-                    id = $self.attr("data-id");
+            this.$el.append(listing_el);
 
-                google.maps.event.addDomListener($self[0], "click", function(ev) {
-                    _this.trigger("clickListing", id);
-                });
-            },
+            var $self = $(listing_el),
+                id = $self.attr("data-id");
 
-            setListingContainerWidth: function() {
-                var pixel_width = _globals.listing_width * this.collection.length;
-                $("#bottom-container").find(".listing-container").attr("style", "width:" + pixel_width + "px;");        
-            },
+            google.maps.event.addDomListener($self[0], "click", function(ev) {
+                _this.trigger("clickListing", id);
+            });
+        },
 
-            setActiveListing: function(id) {
-                var $active_listing = this.$el.find("[data-id=\"" + id + "\"]"),
-                    $listing_scroll = $("#bottom-container .listing-scroll"),
-                    _this = this;
+        setListingContainerWidth: function() {
+            var pixel_width = _globals.listing_width * this.collection.length;
+            $("#bottom-container").find(".listing-container").attr("style", "width:" + pixel_width + "px;");
+        },
 
-                this.$el.find(".listing").removeClass("active");
-                $active_listing.addClass("active");
+        setActiveListing: function(id) {
+            var $active_listing = this.$el.find("[data-id=\"" + id + "\"]"),
+                $listing_scroll = $("#bottom-container .listing-scroll"),
+                _this = this;
 
-                // If it's currently animating, stop the animation.
-                if ( this.isAnimating ){
-                    $listing_scroll.stop();
-                }
+            this.$el.find(".listing").removeClass("active");
+            $active_listing.addClass("active");
 
-                this.isAnimating = true;
-                
-                $listing_scroll.animate({scrollLeft: $active_listing[0].offsetLeft - ($(window).width()/2)}, 1200, function() {
-                    _this.isAnimating = false;
-                });
-            },
-
-            clickListing: function(event) {
-                var $this = $(event.currentTarget),
-                    id = $this.attr("data-id");
-
-                this.setActiveListing(id);
-                this.trigger("clickListing", id);
-            },
-
-            resetListings: function() {
-                this.$el.find(".listing").show().removeClass("active");
-                $("#bottom-container .listing-scroll").animate({scrollLeft: 0}, 1200);
-            },
-
-            filterListingsByArray: function(active_markers) {
-                var $listings = this.$listings;
-                
-                $listings.hide();
-                _.each(active_markers, function(id){
-                    $listings.filter('[data-id="' + id + '"]').show();
-                });
-                
-                $listings.filter(":visible").first()[0].click();
+            // If it's currently animating, stop the animation.
+            if (this.isAnimating) {
+                $listing_scroll.stop();
             }
 
-        });
-    
+            this.isAnimating = true;
+
+            $listing_scroll.animate({
+                scrollLeft: $active_listing[0].offsetLeft - ($(window).width() / 2)
+            }, 1200, function() {
+                _this.isAnimating = false;
+            });
+        },
+
+        clickListing: function(event) {
+            var $this = $(event.currentTarget),
+                id = $this.attr("data-id");
+
+            this.setActiveListing(id);
+            this.trigger("clickListing", id);
+        },
+
+        resetListings: function() {
+            this.$el.find(".listing").show().removeClass("active");
+            $("#bottom-container .listing-scroll").animate({
+                scrollLeft: 0
+            }, 1200);
+        },
+
+        filterListingsByArray: function(active_markers) {
+            var $listings = this.$listings;
+
+            $listings.hide();
+            _.each(active_markers, function(id) {
+                $listings.filter('[data-id="' + id + '"]').show();
+            });
+
+            $listings.filter(":visible").first()[0].click();
+        }
+
+    });
+
     return foodmap.ListingContainerView;
-    
-    }
-);
+
+});
