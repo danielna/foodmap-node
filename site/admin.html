@@ -1,7 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Admin | Notable NOVA Eateries</title>
     <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="assets/css/admin.css">
@@ -57,7 +57,7 @@
 
         <h1>List [Count: <span class="count"></span>]</h1>
         <div class="container-filters">
-            <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> | 
+            <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> |
             <a href="javascript:;" class="filter date-created">Sort by Created Date</a> |
             <a href="javascript:;" class="filter alpha">Sort Alphabetically</a>
         </div>
@@ -70,24 +70,24 @@
     <!-- LISTING -->
      <script type="text/template" id="template-admin-listing">
         <div class="options">
-            <a href="javascript:;" data-id="<%=id%>" class="model-edit">Edit</a> | 
+            <a href="javascript:;" data-id="<%=id%>" class="model-edit">Edit</a> |
             <a href="javascript:;" data-id="<%=id%>" class="model-delete">Delete</a>
         </div>
         <div class="name">
-            <span class="label">Name:</span> 
+            <span class="label">Name:</span>
             <%= name %>
         </div>
         <div class="slide">
             <div class="description">
-                <span class="label">Description:</span> 
+                <span class="label">Description:</span>
                 <%= description %>
             </div>
             <div class="price">
-                <span class="label">Price:</span> 
+                <span class="label">Price:</span>
                 <%= price %>
             </div>
             <div class="ethnicity">
-                <span class="label">Ethnicity:</span> 
+                <span class="label">Ethnicity:</span>
                 <% for(var e in ethnicity) { %>
                     <%= ethnicity[e] %>
                 <% } %>
