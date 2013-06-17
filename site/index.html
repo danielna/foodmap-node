@@ -1,7 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="Daniel Na" />
     <meta name="description" content="My map of favorite places to eat in Northern VA/MD/DC.">
     <title>Notable NOVA Eateries</title>
@@ -10,6 +10,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:900italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    <div class="app-container">
 
     <article id="left-container">
         <h2>Filter by Tag</h2>
@@ -21,8 +22,6 @@
         <ul id="container-ethnicities" class="tags">
             <!-- #template-tag -->
         </ul>
-
-
     </article>
 
     <article id="top-bar">
@@ -35,11 +34,8 @@
         <a class="header-link" href="http://blog.danielna.com/2013/03/12/where-to-eat-in-northern-va.html" title="Where to Eat in Northern Virginia" target="_blank">What the heck is this?!</a>
     </article>
 
-
     <article id="container-map">
     </article>
-
-
 
     <article id="bottom-container">
         <div class="listing-scroll">
@@ -48,8 +44,6 @@
             </div>
         </div>
     </article>
-
-
 
     <div id="container-welcome">
         <span id="js-close-welcome" title="Close this message">
@@ -83,8 +77,6 @@
         </p>
     </div>
 
-
-
     <!-- *** templates *** -->
 
     <!-- LISTING -->
@@ -106,10 +98,10 @@
     </script>
 
     <!-- *** end templates *** -->
-    
+    </div>
+
     <script data-main="/assets/js/foodmap.init.js" src="assets/js/lib/require.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiA6472v_0VZUQjmVvXQ4peWbFZsUcpVc&sensor=false"></script>
-    
+
     <!--
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -121,7 +113,7 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    </script> 
+    </script>
     -->
 
 </body>
