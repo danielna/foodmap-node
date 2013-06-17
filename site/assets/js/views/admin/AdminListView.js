@@ -1,89 +1,94 @@
-
 define(["jquery", "backbone", "views/admin/AdminListing"],
-    
-    function($, Backbone, AdminListing) {
 
-        var foodmap = foodmap || {};
+function($, Backbone, AdminListing) {
 
-        foodmap.AdminListView = Backbone.View.extend({
+    var foodmap = foodmap || {};
 
-            el: "ul.list",
+    foodmap.AdminListView = Backbone.View.extend({
 
-            events: {
-                "click .model-edit": "editListing",
-                "click .model-delete": "deleteListing"
-            },
+        el: "ul.list",
 
-            initialize: function() {
-                this.collection.bind("reset", _.bind(this.render, this));
-                this.listenTo( this.collection, 'add', this.render );
-            },
+        events: {
+            "click .model-edit": "editListing",
+            "click .model-delete": "deleteListing",
+            "click .collapse": "toggleListingVisible"
+        },
 
-            render: function() {
-                this.collection.each(function(listing) {
-                    var adminListing = new AdminListing({
-                        model: listing
-                    });
+        initialize: function() {
+            this.collection.bind("reset", _.bind(this.render, this));
+            this.listenTo(this.collection, 'add', this.render);
+        },
 
-                    this.$el.append( adminListing.render().el );
-                }, this);
-            },
+        render: function() {
+            this.collection.each(function(listing) {
+                var adminListing = new AdminListing({
+                    model: listing
+                });
 
-            renderFiltered: function(filter) {
-                var collection = this.collection;
+                this.$el.append(adminListing.render().el);
+            }, this);
+        },
 
-                switch (filter) {
-                    case "date-modified":
-                        collection = this.collection.sortByDateProperty("modified");
-                        break;
-                    case "date-modified-desc":
-                        collection = this.collection.sortByDateProperty("modified", true);
-                        break;
-                    case "date-created":
-                        collection = this.collection.sortByDateProperty("created");
-                        break;
-                    case "date-created-desc":
-                        collection = this.collection.sortByDateProperty("created", true);
-                        break;
-                    case "alpha":
-                        collection = this.collection.sortByAlpha();
-                        break;
-                    case "alpha-desc":
-                        collection = this.collection.sortByAlpha(true);
-                        break;
-                }
-                this.$el.html("");
-                
-                _.each( collection, function(listing) {
-                    var adminListing = new AdminListing({
-                        model: listing
-                    });
-                    
-                    this.$el.append( adminListing.render().el );
-                }, this);
-            },
+        renderFiltered: function(filter) {
+            var collection = this.collection;
 
-            editListing: function(e){
-                e.preventDefault();
-
-                var $this = $(event.currentTarget),
-                    id = $this.attr("data-id");
-                
-                this.trigger("editListing", id);
-            },
-
-            deleteListing: function(e){
-                e.preventDefault();
-
-                var $this = $(event.currentTarget),
-                    id = $this.attr("data-id");
-                
-                this.trigger("deleteListing", id);
+            switch (filter) {
+                case "date-modified":
+                    collection = this.collection.sortByDateProperty("modified");
+                    break;
+                case "date-modified-desc":
+                    collection = this.collection.sortByDateProperty("modified", true);
+                    break;
+                case "date-created":
+                    collection = this.collection.sortByDateProperty("created");
+                    break;
+                case "date-created-desc":
+                    collection = this.collection.sortByDateProperty("created", true);
+                    break;
+                case "alpha":
+                    collection = this.collection.sortByAlpha();
+                    break;
+                case "alpha-desc":
+                    collection = this.collection.sortByAlpha(true);
+                    break;
             }
+            this.$el.html("");
 
-        });
-    
+            _.each(collection, function(listing) {
+                var adminListing = new AdminListing({
+                    model: listing
+                });
+
+                this.$el.append(adminListing.render().el);
+            }, this);
+        },
+
+        editListing: function(e) {
+            e.preventDefault();
+
+            var $this = $(event.currentTarget),
+                id = $this.attr("data-id");
+
+            this.trigger("editListing", id);
+        },
+
+        deleteListing: function(e) {
+            e.preventDefault();
+
+            var $this = $(event.currentTarget),
+                id = $this.attr("data-id");
+
+            this.trigger("deleteListing", id);
+        },
+
+        toggleListingVisible: function(e) {
+            e.preventDefault();
+
+            return $(e.currentTarget).parent().siblings(".slide").toggle();
+        }
+
+    });
+
     return foodmap.AdminListView;
-    
-    }
-);
+
+});

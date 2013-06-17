@@ -146,6 +146,10 @@ body {
   font-size: 16px;
   display: inline-block;
 }
+/* line 90, ../sass/admin.scss */
+.list li div.slide {
+  display: none;
+}
 /* line 93, ../sass/admin.scss */
 .list li div.description h2 {
   font-size: 14px;
