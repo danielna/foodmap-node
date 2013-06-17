@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListView", "models/MapItem"],
+define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListView", "models/MapItem", "text!templates/admin/index.html", "text!/assets/css/map.css"],
 
-function($, Backbone, MapItemList, AdminListView, MapItem) {
+function($, Backbone, MapItemList, AdminListView, MapItem, template) {
 
     var foodmap = foodmap || {};
 
@@ -8,15 +8,20 @@ function($, Backbone, MapItemList, AdminListView, MapItem) {
 
         el: "body",
 
+        template: _.template(template),
+
         events: {
             "click #submit": "addListing",
             "click .filter": "filterListHandler"
         },
 
         initialize: function() {
+            this.$app_container = this.$el.find(".app-container");
+            this.$app_container.html(this.template);
+
+            this.$form = this.$app_container.find("#add-listing");
+            this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
-            this.$form = this.$el.find("#add-listing");
-            this.$count = this.$body.find(".count");
 
             this.collection = new MapItemList();
             this.adminListView = new AdminListView({

@@ -1,0 +1,57 @@
+<link rel="stylesheet" type="text/css" href="assets/css/admin.css">
+
+<article class="admin-eateries">
+    <a class="back-home" href="/">Home</a>
+    <h1 class="top">Eateries</h1>
+    <section class="form">
+        <form id="add-listing" action="#">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name"/>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <select id="price" name="price">
+                    <option value="low">Low</option>
+                    <option value="med">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div>
+                <label for="ethnicity">Ethnicity:</label>
+                <input type="text" name="ethnicity" id="ethnicity"/>
+            </div>
+            <div>
+                <label for="tags">Tags:</label>
+                <input type="text" name="tags" id="tags"/>
+            </div>
+            <div class="group">
+                <span>Coordinates</span>
+                <div>
+                    <label for="lat">Latitude:</label>
+                    <input type="text" id="lat" name="lat"/>
+                </div>
+                <div>
+                    <label for="lng">Longitude:</label>
+                    <input type="text" id="lng" name="lng"/>
+                </div>
+            </div>
+            <input type="hidden" name="created" value=""></input>
+            <input type="submit" id="submit"></input>
+
+        </form>
+    </section>
+
+    <h1>List [Count: <span class="count"></span>]</h1>
+    <div class="container-filters">
+        <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> |
+        <a href="javascript:;" class="filter date-created">Sort by Created Date</a> |
+        <a href="javascript:;" class="filter alpha">Sort Alphabetically</a>
+    </div>
+        <ul class="list">
+        </ul>
+</article>
