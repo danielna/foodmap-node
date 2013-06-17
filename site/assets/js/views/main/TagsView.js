@@ -1,46 +1,48 @@
+define(["jquery", "backbone", "text!templates/main/tag.html"],
 
-define(["jquery", "backbone"],
-    
-    function($, Backbone) {
+function($, Backbone, template) {
 
-        var foodmap = foodmap || {};
+    var foodmap = foodmap || {};
 
-        foodmap.TagsView = Backbone.View.extend({
-            
-            el: "#left-container",
+    foodmap.TagsView = Backbone.View.extend({
 
-            template: _.template( $("#template-tag").html() ),
+        el: "#left-container",
 
-            events: {
-                "click .tag": "clickTag"
-            },
+        template: _.template(template),
 
-            initialize: function() {
-                this.$container_tags = this.$("#container-tags");
-                this.$container_ethnicities = this.$("#container-ethnicities");
+        events: {
+            "click .tag": "clickTag"
+        },
 
-                this.collection.bind("reset", _.bind(this.render, this));
-            },
+        initialize: function() {
+            this.$container_tags = this.$("#container-tags");
+            this.$container_ethnicities = this.$("#container-ethnicities");
 
-            render: function() {
-                this.$container_tags.html( this.template({ tags: this.collection.tags() }) );
-                this.$container_ethnicities.html( this.template({ tags: this.collection.ethnicities() }) );
-                this.$tags = this.$(".tag");
-            },
+            this.collection.bind("reset", _.bind(this.render, this));
+        },
 
-            clickTag: function(event) {
-                var $this = $(event.currentTarget),
-                    id = $this.attr("data-id").trim();
+        render: function() {
+            this.$container_tags.html(this.template({
+                tags: this.collection.tags()
+            }));
+            this.$container_ethnicities.html(this.template({
+                tags: this.collection.ethnicities()
+            }));
+            this.$tags = this.$(".tag");
+        },
 
-                this.$tags.removeClass("active");
-                $this.addClass("active");
-                
-                this.trigger("clickTag", id);
-            }
+        clickTag: function(event) {
+            var $this = $(event.currentTarget),
+                id = $this.attr("data-id").trim();
 
-        });
+            this.$tags.removeClass("active");
+            $this.addClass("active");
+
+            this.trigger("clickTag", id);
+        }
+
+    });
 
     return foodmap.TagsView;
 
-    }
-);
+});

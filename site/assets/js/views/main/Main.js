@@ -1,12 +1,14 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/main/MapView", "views/main/ListingContainerView", "views/main/TagsView", "foodmap.globals"],
+define(["jquery", "backbone", "collections/MapItemList", "views/main/MapView", "views/main/ListingContainerView", "views/main/TagsView", "foodmap.globals", "text!templates/main/index.html"],
 
-function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _globals) {
+function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _globals, template) {
 
     var foodmap = foodmap || {};
 
     foodmap.Main = Backbone.View.extend({
 
         el: "body",
+
+        template: _.template(template),
 
         events: {
             "click #js-btn-welcome": "toggleWelcome",
@@ -17,9 +19,13 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         },
 
         initialize: function() {
-            this.$container_welcome = _globals.container_welcome;
-            this.$tags = this.$(".tags .tag");
+            this.$app_container = this.$el.find(".app-container");
+            this.$app_container.html(this.template);
+
+            this.$container_welcome = this.$app_container.find(_globals.container_welcome);
+            this.$tags = this.$app_container.find(".tags .tag");
             this.$body = this.$el;
+
 
             foodmap.MapList = new MapItemList();
             this.map = new MapView({

@@ -5,7 +5,8 @@ require.config({
         'backbone': 'lib/backbone.min',
         'jquery': 'lib/jquery-1.10.1.min',
         'infobox': 'lib/infobox.packed',
-        'async': 'lib/async'
+        'async': 'lib/async',
+        'text': 'lib/text'
     }, // set up custom paths to libraries, or paths to RequireJS plugins
     shim: {
         'underscore': {
