@@ -9,6 +9,7 @@ function($, Backbone, Main, AdminMain) {
         routes: {
             '': 'main',
             'admin': 'admin',
+            'admin/:id': 'adminEdit',
             '*actions': 'default' //default
         },
 
@@ -28,6 +29,12 @@ function($, Backbone, Main, AdminMain) {
         admin: function() {
             console.log("admin");
             new AdminMain();
+        },
+
+        adminEdit: function(id) {
+            console.log("admin id:", id);
+            var main = new AdminMain();
+            main.setForm(id);
         }
 
     });

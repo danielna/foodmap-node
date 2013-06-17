@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/admin/AdminListView", "models/MapItem", "text!templates/admin/index.html", "text!/assets/css/map.css"],
+define(["jquery", "backbone", "models/MapItem", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
 
-function($, Backbone, MapItemList, AdminListView, MapItem, template) {
+function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) {
 
     var foodmap = foodmap || {};
 
@@ -24,6 +24,10 @@ function($, Backbone, MapItemList, AdminListView, MapItem, template) {
             this.$body = this.$el;
 
             this.collection = new MapItemList();
+            this.AdminForm = new AdminForm({
+                model: new MapItem()
+            });
+
             this.adminListView = new AdminListView({
                 collection: this.collection
             }),
@@ -64,6 +68,19 @@ function($, Backbone, MapItemList, AdminListView, MapItem, template) {
             formData.tags = tags;
 
             this.collection.create(formData);
+        },
+
+
+        // TODO: THIS DOES NOT WORK
+        // And I don't think this is how it should work anyway.
+        setForm: function(id) {
+            console.log("id:", id);
+            console.log("this.collection:", this.collection);
+            var _model = (id) ? this.collection.get(id) : new MapItem();
+            console.log("_model:", _model);
+            this.AdminForm = new AdminForm({
+                model: _model
+            });
         },
 
         resetView: function() {
