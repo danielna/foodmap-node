@@ -1,101 +1,107 @@
+define(["jquery", "backbone", "collections/MapItemList", "views/main/MapView", "views/main/ListingContainerView", "views/main/TagsView", "foodmap.globals"],
 
-define(["jquery", "backbone", "collections/MapItemList", "views/main/ListingContainerView", "views/main/TagsView", "views/main/MapView", "foodmap.globals"],
-    
-    function($, Backbone, MapItemList, ListingContainerView, TagsView, MapView, _globals) {
+function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _globals) {
 
-        var foodmap = foodmap || {};
+    var foodmap = foodmap || {};
 
-        foodmap.Main = Backbone.View.extend({
+    foodmap.Main = Backbone.View.extend({
 
-            el: "body",
+        el: "body",
 
-            events: {
-                "click #js-btn-welcome": "toggleWelcome",
-                "click #js-close-welcome": "toggleWelcome",
-                "click #js-btn-reset": "onReset",
-                "click #js-btn-menu": "toggleLeftMenu",
-                "click #js-btn-admin": "redirectToAdmin"
-            },
-            
-            initialize: function() {
-                this.$container_welcome = _globals.container_welcome;
-                this.$tags = this.$(".tags .tag");
-                this.$body = this.$el;
+        events: {
+            "click #js-btn-welcome": "toggleWelcome",
+            "click #js-close-welcome": "toggleWelcome",
+            "click #js-btn-reset": "onReset",
+            "click #js-btn-menu": "toggleLeftMenu",
+            "click #js-btn-admin": "redirectToAdmin"
+        },
 
-                foodmap.MapList = new MapItemList();
-                this.listingContainerView = new ListingContainerView({ collection: foodmap.MapList }),
-                this.tagsView = new TagsView({ collection: foodmap.MapList }),
-                this.map = new MapView({ collection: foodmap.MapList });
+        initialize: function() {
+            this.$container_welcome = _globals.container_welcome;
+            this.$tags = this.$(".tags .tag");
+            this.$body = this.$el;
 
-                this.listenTo(this.map, "clickMapMarker", this.clickMapMarker);
-                this.listenTo(this.listingContainerView, "clickListing", this.clickListing);
-                this.listenTo(this.tagsView, "clickTag", this.clickTag);
+            foodmap.MapList = new MapItemList();
+            this.map = new MapView({
+                collection: foodmap.MapList
+            });
+            this.listingContainerView = new ListingContainerView({
+                collection: foodmap.MapList
+            }),
+            this.tagsView = new TagsView({
+                collection: foodmap.MapList
+            }),
 
-                foodmap.MapList.fetch({reset: true});
-            },
+            this.listenTo(this.map, "clickMapMarker", this.clickMapMarker);
+            this.listenTo(this.listingContainerView, "clickListing", this.clickListing);
+            this.listenTo(this.tagsView, "clickTag", this.clickTag);
 
-            toggleWelcome: function() {
-                this.$container_welcome.fadeToggle();
-            },
+            foodmap.MapList.fetch({
+                reset: true
+            });
+        },
 
-            resetActiveTag: function() {
-                this.$tags.removeClass("active");
-            },
+        toggleWelcome: function() {
+            this.$container_welcome.fadeToggle();
+        },
 
-            onReset: function() {
-                this.$container_welcome.fadeIn();
-                this.resetActiveTag();
-                this.map.resetZoom();
-                this.map.setMarkersVisible();
-                this.listingContainerView.resetListings();
+        resetActiveTag: function() {
+            this.$tags.removeClass("active");
+        },
 
-            },
+        onReset: function() {
+            this.$container_welcome.fadeIn();
+            this.resetActiveTag();
+            this.map.resetZoom();
+            this.map.setMarkersVisible();
+            this.listingContainerView.resetListings();
 
-            toggleLeftMenu: function(event) {
-                var $this = $(event.currentTarget);
+        },
 
-                this.$container_welcome.fadeOut();
-                this.$el.toggleClass("menu-left");
-                
-                if (this.$el.hasClass("menu-left")){
-                    $this.html("&raquo; Hide");
-                } else {
-                    $this.html("&laquo; Show");
-                }
-            },
+        toggleLeftMenu: function(event) {
+            var $this = $(event.currentTarget);
 
-            // Delegate behavior to views based on the click of a map marker
-            clickMapMarker: function(id){
-                this.$container_welcome.fadeOut();
+            this.$container_welcome.fadeOut();
+            this.$el.toggleClass("menu-left");
 
-                if (!this.$body.hasClass("menu-on")) {
-                    this.$body.addClass("menu-on");
-                }
-                this.listingContainerView.setActiveListing(id);
-                this.map.zoomToMarker(id);
-                this.map.showInfoBox(id);
-            },
-
-            // Delegate behavior to views based on the click of a listing
-            clickListing: function(id) {
-                this.$container_welcome.fadeOut();
-                this.listingContainerView.setActiveListing(id);
-                this.map.zoomToMarker(id);
-                this.map.showInfoBox(id);
-            },
-
-            clickTag: function(id) {
-                var active_markers = this.map.filterMarkersByTag(id);
-                this.listingContainerView.filterListingsByArray(active_markers);
-            },
-
-            redirectToAdmin: function() {
-                window.location ="/admin.html";
+            if (this.$el.hasClass("menu-left")) {
+                $this.html("&raquo; Hide");
+            } else {
+                $this.html("&laquo; Show");
             }
+        },
 
-        });
+        // Delegate behavior to views based on the click of a map marker
+        clickMapMarker: function(id) {
+            this.$container_welcome.fadeOut();
+
+            if (!this.$body.hasClass("menu-on")) {
+                this.$body.addClass("menu-on");
+            }
+            this.listingContainerView.setActiveListing(id);
+            this.map.zoomToMarker(id);
+            this.map.showInfoBox(id);
+        },
+
+        // Delegate behavior to views based on the click of a listing
+        clickListing: function(id) {
+            this.$container_welcome.fadeOut();
+            this.listingContainerView.setActiveListing(id);
+            this.map.zoomToMarker(id);
+            this.map.showInfoBox(id);
+        },
+
+        clickTag: function(id) {
+            var active_markers = this.map.filterMarkersByTag(id);
+            this.listingContainerView.filterListingsByArray(active_markers);
+        },
+
+        redirectToAdmin: function() {
+            window.location = "/admin.html";
+        }
+
+    });
 
     return foodmap.Main;
 
-    }
-);
+});
