@@ -28,6 +28,7 @@ function($, Backbone, MapItemList, AdminListView, MapItem) {
             });
 
             this.listenTo(this.collection, 'add', this.resetView);
+            this.listenTo(this.collection, 'reset', this.resetView);
             this.listenTo(this.adminListView, 'editListing', this.addListing);
             this.listenTo(this.adminListView, 'deleteListing', this.deleteListing);
         },
