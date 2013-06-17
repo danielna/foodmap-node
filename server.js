@@ -86,7 +86,7 @@ app.post( '/api/listings', function( request, response ) {
         ethnicity: request.body.ethnicity,
         tags: request.body.tags,
         coordinates: {
-            lat: request.body.lat, 
+            lat: request.body.lat,
             lng: request.body.lng
         }
     });
@@ -110,7 +110,7 @@ app.put( '/api/listings', function( request, response ) {
         listing.price = request.body.price,
         listing.ethnicity = request.body.ethnicity,
         listing.tags = request.body.tags,
-        listing.coordinates.lat = request.body.lat, 
+        listing.coordinates.lat = request.body.lat,
         listing.coordinates.lng = request.body.lng,
         listing.modified = request.body.modified;
 
