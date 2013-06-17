@@ -13,7 +13,7 @@ function($, Backbone, Main, AdminMain) {
         },
 
         default: function() {
-            console.log("default called");
+            alert("No designated action");
         },
 
         initialize: function() {
