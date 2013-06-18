@@ -8,7 +8,7 @@ function($, Backbone) {
 
         urlRoot: '/api/listings',
 
-        idAttribute:"_id",
+        idAttribute: "_id",
 
         parse: function(response) {
             response.id = response._id;
