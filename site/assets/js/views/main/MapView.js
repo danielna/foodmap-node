@@ -32,8 +32,13 @@ function($, Backbone, _InfoBox, _globals) {
         parseMarkers: function() {
             var _this = this;
             this.collection.each(function(mapItem) {
-                var latLng = new google.maps.LatLng(parseFloat(mapItem.get("coordinates").lat, 10), parseFloat(mapItem.get("coordinates").lng, 10));
-                this.markerBounds.extend(latLng);
+                var lat = parseFloat(mapItem.get("coordinates").lat, 10),
+                    lng = parseFloat(mapItem.get("coordinates").lng, 10),
+                    latLng = new google.maps.LatLng(lat, lng);
+
+                if (!(isNaN(lat) || isNaN(lng))) {
+                    this.markerBounds.extend(latLng);
+                }
 
                 // create map markers
                 var marker = new google.maps.Marker({
