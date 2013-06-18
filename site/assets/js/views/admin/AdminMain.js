@@ -47,7 +47,7 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
         addListing: function(e) {
             e.preventDefault();
 
-            this.model = this.AdminForm.model,
+            var model = this.AdminForm.model,
                 formData = {};
 
             _.each(this.$form.serializeArray(), function(data) {
@@ -71,12 +71,13 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             formData.tags = tags;
 
             // PUT
-            if (this.model) {
+            if (model) {
                 // Todo: Why don't these callbacks fire?
                 // Reset/redirect the form
                 // Put a cute little message saying the form was updated
+                // Try to edit the same eatery multiple times -- url error.
 
-                this.model.save(formData, {
+                model.save(formData, {
                     success: function() {
                         console.log("successful save!");
                     },
