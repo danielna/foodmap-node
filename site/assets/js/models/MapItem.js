@@ -6,6 +6,8 @@ function($, Backbone) {
 
     foodmap.MapItem = Backbone.Model.extend({
 
+        urlRoot: '/api/listings',
+
         idAttribute:"_id",
 
         parse: function(response) {
