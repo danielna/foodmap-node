@@ -20,7 +20,8 @@ function($, Backbone, AdminListing) {
         },
 
         render: function() {
-            this.collection.each(function(listing) {
+            var collection = _(this.collection.sortByDateProperty("modified"));
+            collection.each(function(listing) {
                 var adminListing = new AdminListing({
                     model: listing
                 });
@@ -66,10 +67,9 @@ function($, Backbone, AdminListing) {
         editListing: function(e) {
             e.preventDefault();
 
-            var $this = $(event.currentTarget),
-                id = $this.attr("data-id");
+            var id = $(e.currentTarget).parents("li").attr("data-id");
 
-            this.trigger("editListing", id);
+            window.location = "/#/admin/" + id;
         },
 
         deleteListing: function(e) {
