@@ -10,11 +10,12 @@ function($, Backbone, MapItemList, Main, AdminMain) {
             '': 'main',
             'admin': 'admin',
             'admin/:id': 'adminEdit',
-            '*actions': 'default' //default
+            '*actions': 'default'
         },
 
         initialize: function() {
             mapItemList = new MapItemList();
+            this.currentView = null;
             Backbone.history.start();
         },
 
@@ -24,24 +25,46 @@ function($, Backbone, MapItemList, Main, AdminMain) {
 
         main: function() {
             console.log("main");
-            new Main();
+            if (this.currentView) {
+                this.closeCurrentView();
+            };
+            var view = new Main();
+            this.setCurrentView(view);
         },
 
         admin: function() {
             console.log("admin");
-            new AdminMain();
+            if (this.currentView) {
+                this.closeCurrentView();
+            }
+            var view = new AdminMain();
+            this.setCurrentView(view);
         },
 
         adminEdit: function(id) {
+            console.log("EDIT");
+            var that = this;
             mapItemList.fetch({
                 success: function() {
-                    var listing = mapItemList.get(id),
-                        main = new AdminMain(listing);
+                    var listing = mapItemList.get(id);
+                    if (that.currentView) {
+                        that.closeCurrentView();
+                    }
+                    var view = new AdminMain(listing);
+                    that.setCurrentView(view);
                 },
                 error: function() {
                     console.error("Something went wrong with the collection fetch.");
                 }
             });
+        },
+
+        setCurrentView: function(view){
+            this.currentView = view;
+        },
+
+        closeCurrentView: function(){
+            this.currentView.close();
         }
 
     });

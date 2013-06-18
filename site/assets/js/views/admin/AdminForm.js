@@ -8,6 +8,10 @@ function($, Backbone, template) {
 
         el: "#add-listing",
 
+        events: {
+            "click #submit": "addListing"
+        },
+
         template: _.template(template),
 
         initialize: function(){
@@ -15,8 +19,13 @@ function($, Backbone, template) {
         },
 
         render: function() {
-            this.$el.html(this.template, this.model.toJSON());
+            this.$el.html(this.template);
             return this;
+        },
+
+        addListing: function(e) {
+            e.preventDefault();
+            this.trigger("addListing");
         }
 
     });

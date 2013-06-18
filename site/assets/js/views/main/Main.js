@@ -19,13 +19,13 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         },
 
         initialize: function() {
-            this.$app_container = this.$el.find(".app-container");
-            this.$app_container.html(this.template);
+            this.resetContainer();
 
             this.$container_welcome = this.$app_container.find(_globals.container_welcome);
             this.$tags = this.$app_container.find(".tags .tag");
             this.$body = this.$el;
 
+            this.childViews = [];
 
             foodmap.MapList = new MapItemList();
             this.map = new MapView({
@@ -38,6 +38,10 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
                 collection: foodmap.MapList
             }),
 
+            this.childViews.push(this.map);
+            this.childViews.push(this.listingContainerView);
+            this.childViews.push(this.tagsView);
+
             this.listenTo(this.map, "clickMapMarker", this.clickMapMarker);
             this.listenTo(this.listingContainerView, "clickListing", this.clickListing);
             this.listenTo(this.tagsView, "clickTag", this.clickTag);
@@ -45,6 +49,11 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
             foodmap.MapList.fetch({
                 reset: true
             });
+        },
+
+        resetContainer: function() {
+            this.$app_container = this.$el.find(".app-container");
+            this.$app_container.html(this.template);
         },
 
         toggleWelcome: function() {
@@ -104,6 +113,14 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
 
         redirectToAdmin: function() {
             window.location = "#/admin";
+        },
+
+        close: function() {
+            this.resetContainer();
+            this.stopListening();
+            _.each(this.childViews, function(childView) {
+                childView.remove();
+            });
         }
 
     });

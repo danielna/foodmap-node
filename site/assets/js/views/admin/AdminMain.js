@@ -11,14 +11,14 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
         template: _.template(template),
 
         events: {
-            "click #submit": "addListing",
             "click .filter": "filterListHandler"
         },
 
         initialize: function(model) {
             console.log("Initialize");
-            this.$app_container = this.$el.find(".app-container");
-            this.$app_container.html(this.template);
+            this.resetContainer();
+
+            this.childViews = [];
 
             this.$form = this.$app_container.find("#add-listing");
             this.$count = this.$app_container.find(".count");
@@ -30,7 +30,7 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
                 this.model = new MapItem();
             }
 
-            this.AdminForm = new AdminForm({
+            this.adminForm = new AdminForm({
                 model: this.model
             });
 
@@ -41,32 +41,29 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.collection = new MapItemList();
             this.adminListView = new AdminListView({
                 collection: this.collection
-            }),
+            });
             this.collection.fetch({
                 reset: true
             });
 
+            this.childViews.push(this.adminForm);
+            this.childViews.push(this.adminListView);
+
             this.listenTo(this.collection, 'add', this.resetView);
             this.listenTo(this.collection, 'reset', this.updateCount);
             this.listenTo(this.adminListView, 'deleteListing', this.deleteListing);
+            this.listenTo(this.adminForm, 'addListing', this.addListing);
         },
 
-        // WHY DOES THIS FIRE TWICE ON EDIT?
-        // Bindings and unbindings
-        addListing: function(e) {
-            e.preventDefault();
+        addListing: function() {
+            console.log("FIRE ADD");
 
-            var model = this.AdminForm.model,
+            var model = this.adminForm.model,
                 formData = {};
-
-            console.log("this.AdminForm:", this.AdminForm);
-            console.log("this.AdminForm.model:", this.AdminForm.model);
 
             _.each(this.$form.serializeArray(), function(data) {
                 formData[data.name] = data.value;
             });
-
-            console.log("formData:", formData);
 
             var ethnicity = [],
                 tags = [],
@@ -83,21 +80,18 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
 
             formData.ethnicity = ethnicity;
             formData.tags = tags;
-
             this.listenTo(model, 'change', this.resetAdmin);
-
             // PUT
             if (model) {
                 // Reset/redirect the form
                 // Put a cute little message saying the form was updated
                 // Try to edit the same eatery multiple times -- url error.
-
                 model.save(formData, {
                     success: function() {
                         console.log("successful save!");
                     },
                     error: function() {
-                        console.error("update failed");
+                        console.error("error in update.");
                     }
                 });
 
@@ -118,6 +112,11 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.$form.find("#tags").val(model.get("tags"));
             this.$form.find("#lat").val(model.get("coordinates").lat);
             this.$form.find("#lng").val(model.get("coordinates").lng);
+        },
+
+        resetContainer: function() {
+            this.$app_container = this.$el.find(".app-container");
+            this.$app_container.html(this.template);
         },
 
         resetView: function() {
@@ -145,6 +144,14 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
 
             $link.attr("class", "filter " + className);
             this.adminListView.renderFiltered(className);
+        },
+
+        close: function() {
+            this.resetContainer();
+            this.stopListening();
+            _.each(this.childViews, function(childView) {
+                childView.remove();
+            });
         }
 
     });
