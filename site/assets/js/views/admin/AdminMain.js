@@ -23,9 +23,10 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
 
+            this.model = new MapItem();
             this.collection = new MapItemList();
             this.AdminForm = new AdminForm({
-                model: new MapItem()
+                model: this.model
             });
 
             this.adminListView = new AdminListView({
@@ -37,7 +38,8 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             });
 
             this.listenTo(this.collection, 'add', this.resetView);
-            this.listenTo(this.collection, 'reset', this.resetView);
+            this.listenTo(this.collection, 'reset', this.updateCount);
+            this.listenTo(this.model, 'change', this.resetView);
             this.listenTo(this.adminListView, 'editListing', this.addListing);
             this.listenTo(this.adminListView, 'deleteListing', this.deleteListing);
         },
@@ -45,7 +47,8 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
         addListing: function(e) {
             e.preventDefault();
 
-            var formData = {};
+            this.model = this.AdminForm.model,
+                formData = {};
 
             _.each(this.$form.serializeArray(), function(data) {
                 formData[data.name] = data.value;
@@ -67,24 +70,50 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             formData.ethnicity = ethnicity;
             formData.tags = tags;
 
-            this.collection.create(formData);
+            // PUT
+            if (this.model) {
+                // Todo: Why don't these callbacks fire?
+                // Reset/redirect the form
+                // Put a cute little message saying the form was updated
+
+                this.model.save(formData, {
+                    success: function() {
+                        console.log("successful save!");
+                    },
+                    error: function() {
+                        console.error("update failed");
+                    }
+                });
+
+            } else {
+                // POST
+                this.collection.create(formData);
+            }
         },
 
 
-        // TODO: THIS DOES NOT WORK
-        // And I don't think this is how it should work anyway.
-        setForm: function(id) {
-            console.log("id:", id);
-            console.log("this.collection:", this.collection);
-            var _model = (id) ? this.collection.get(id) : new MapItem();
-            console.log("_model:", _model);
+        // TODO: I don't think this is how this should work.
+        setForm: function(model) {
             this.AdminForm = new AdminForm({
-                model: _model
+                model: model
             });
+            this.$form.find("#name").val(model.get("name"));
+            this.$form.find("#description").val(model.get("description"));
+            this.$form.find("select[name='price']").find("option[value='" + model.get("price") + "']").attr("selected", true);
+            this.$form.find("#ethnicity").val(model.get("ethnicity"));
+            this.$form.find("#tags").val(model.get("tags"));
+            this.$form.find("#lat").val(model.get("coordinates").lat);
+            this.$form.find("#lng").val(model.get("coordinates").lng);
+            this.$el.find("h1.top").text("Edit Eatery");
         },
 
         resetView: function() {
+            console.log("RESET");
             this.$form[0].reset();
+            this.updateCount();
+        },
+
+        updateCount: function() {
             this.$count.text(this.collection.length);
         },
 

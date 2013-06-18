@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "views/main/Main", "views/admin/AdminMain"],
+define(["jquery", "backbone", "collections/MapItemList", "views/main/Main", "views/admin/AdminMain"],
 
-function($, Backbone, Main, AdminMain) {
+function($, Backbone, MapItemList, Main, AdminMain) {
 
     var foodmap = foodmap || {};
 
@@ -13,12 +13,13 @@ function($, Backbone, Main, AdminMain) {
             '*actions': 'default' //default
         },
 
-        default: function() {
-            alert("No designated action");
+        initialize: function() {
+            mapItemList = new MapItemList();
+            Backbone.history.start();
         },
 
-        initialize: function() {
-            Backbone.history.start();
+        default: function() {
+            alert("No designated action");
         },
 
         main: function() {
@@ -32,9 +33,16 @@ function($, Backbone, Main, AdminMain) {
         },
 
         adminEdit: function(id) {
-            console.log("admin id:", id);
-            var main = new AdminMain();
-            main.setForm(id);
+            mapItemList.fetch({
+                success: function() {
+                    var listing = mapItemList.get(id),
+                        main = new AdminMain();
+                        main.setForm(listing);
+                },
+                error: function() {
+                    console.error("Something went wrong with the collection fetch.");
+                }
+            });
         }
 
     });
