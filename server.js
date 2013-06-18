@@ -105,7 +105,7 @@ app.post( '/api/listings', function( request, response ) {
 });
 
 // Update a listing
-app.put( '/api/listings', function( request, response ) {
+app.put( '/api/listings/:id', function( request, response ) {
     console.log( 'Updating listing ' + request.body.name );
     return ListingModel.findById( request.params.id, function( err, listing ) {
         listing.name = request.body.name,
@@ -115,7 +115,7 @@ app.put( '/api/listings', function( request, response ) {
         listing.tags = request.body.tags,
         listing.coordinates.lat = request.body.lat,
         listing.coordinates.lng = request.body.lng,
-        listing.modified = request.body.modified;
+        listing.modified = new Date();
 
         return listing.save( function( err ) {
             if( !err ) {
