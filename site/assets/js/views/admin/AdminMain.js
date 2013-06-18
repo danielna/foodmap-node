@@ -15,7 +15,8 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             "click .filter": "filterListHandler"
         },
 
-        initialize: function() {
+        initialize: function(model) {
+            console.log("Initialize");
             this.$app_container = this.$el.find(".app-container");
             this.$app_container.html(this.template);
 
@@ -23,36 +24,49 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
 
-            this.model = new MapItem();
-            this.collection = new MapItemList();
+            if (model) {
+                this.model = model;
+            } else {
+                this.model = new MapItem();
+            }
+
             this.AdminForm = new AdminForm({
                 model: this.model
             });
 
+            if (model) {
+                this.setFormFields(model);
+            }
+
+            this.collection = new MapItemList();
             this.adminListView = new AdminListView({
                 collection: this.collection
             }),
-
             this.collection.fetch({
                 reset: true
             });
 
             this.listenTo(this.collection, 'add', this.resetView);
             this.listenTo(this.collection, 'reset', this.updateCount);
-            this.listenTo(this.model, 'change', this.resetView);
-            this.listenTo(this.adminListView, 'editListing', this.addListing);
             this.listenTo(this.adminListView, 'deleteListing', this.deleteListing);
         },
 
+        // WHY DOES THIS FIRE TWICE ON EDIT?
+        // Bindings and unbindings
         addListing: function(e) {
             e.preventDefault();
 
             var model = this.AdminForm.model,
                 formData = {};
 
+            console.log("this.AdminForm:", this.AdminForm);
+            console.log("this.AdminForm.model:", this.AdminForm.model);
+
             _.each(this.$form.serializeArray(), function(data) {
                 formData[data.name] = data.value;
             });
+
+            console.log("formData:", formData);
 
             var ethnicity = [],
                 tags = [],
@@ -70,9 +84,10 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             formData.ethnicity = ethnicity;
             formData.tags = tags;
 
+            this.listenTo(model, 'change', this.resetAdmin);
+
             // PUT
             if (model) {
-                // Todo: Why don't these callbacks fire?
                 // Reset/redirect the form
                 // Put a cute little message saying the form was updated
                 // Try to edit the same eatery multiple times -- url error.
@@ -88,16 +103,14 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
 
             } else {
                 // POST
+                console.log("else");
                 this.collection.create(formData);
             }
         },
 
+        setFormFields: function(model) {
+            this.$el.find("h1.top").text("Edit Eatery");
 
-        // TODO: I don't think this is how this should work.
-        setForm: function(model) {
-            this.AdminForm = new AdminForm({
-                model: model
-            });
             this.$form.find("#name").val(model.get("name"));
             this.$form.find("#description").val(model.get("description"));
             this.$form.find("select[name='price']").find("option[value='" + model.get("price") + "']").attr("selected", true);
@@ -105,13 +118,16 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.$form.find("#tags").val(model.get("tags"));
             this.$form.find("#lat").val(model.get("coordinates").lat);
             this.$form.find("#lng").val(model.get("coordinates").lng);
-            this.$el.find("h1.top").text("Edit Eatery");
         },
 
         resetView: function() {
             console.log("RESET");
             this.$form[0].reset();
             this.updateCount();
+        },
+
+        resetAdmin: function() {
+            window.location = "/#/admin";
         },
 
         updateCount: function() {

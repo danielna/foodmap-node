@@ -36,8 +36,7 @@ function($, Backbone, MapItemList, Main, AdminMain) {
             mapItemList.fetch({
                 success: function() {
                     var listing = mapItemList.get(id),
-                        main = new AdminMain();
-                        main.setForm(listing);
+                        main = new AdminMain(listing);
                 },
                 error: function() {
                     console.error("Something went wrong with the collection fetch.");
