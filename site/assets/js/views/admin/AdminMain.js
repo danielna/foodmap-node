@@ -49,60 +49,9 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.childViews.push(this.adminForm);
             this.childViews.push(this.adminListView);
 
-            this.listenTo(this.collection, 'add', this.resetView);
+            this.listenTo(this.adminForm, 'addListing', this.resetView);
+            this.listenTo(this.adminListView, 'deleteListing', this.resetView);
             this.listenTo(this.collection, 'reset', this.updateCount);
-            this.listenTo(this.adminListView, 'deleteListing', this.deleteListing);
-            this.listenTo(this.adminForm, 'addListing', this.addListing);
-        },
-
-        addListing: function() {
-            console.log("FIRE ADD");
-
-            var model = this.adminForm.model,
-                formData = {};
-
-            _.each(this.$form.serializeArray(), function(data) {
-                formData[data.name] = data.value;
-            });
-
-            var ethnicity = [],
-                tags = [],
-                req_e = formData.ethnicity.split(","),
-                req_t = formData.tags.split(",");
-
-            for (var ety in req_e) {
-                ethnicity.push((req_e[ety]).trim());
-            }
-
-            for (var t in req_t) {
-                tags.push((req_t[t]).trim());
-            }
-
-            formData.ethnicity = ethnicity;
-            formData.tags = tags;
-            this.listenTo(model, 'change', this.resetAdmin);
-
-            if (model) {
-                // Todo
-                // Put a cute little message saying the form was updated
-                model.save(formData, {
-                    success: function(res) {
-                        console.log("PUT. Updated model: ", res.get("name"));
-                    },
-                    error: function(err) {
-                        console.error("Error in PUT:", err);
-                    }
-                });
-            } else {
-                this.collection.create(formData, {
-                    success: function(res) {
-                        console.log("POST. Saved model: ", res.get("name"));
-                    },
-                    error: function(err) {
-                        console.error("Error in POST:", err);
-                    }
-                });
-            }
         },
 
         setFormFields: function(model) {
@@ -124,12 +73,16 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
 
         resetView: function() {
             console.log("RESET");
+            var that = this;
             this.$form[0].reset();
-            this.updateCount();
-        },
-
-        resetAdmin: function() {
-            window.location = "/#/admin";
+            this.collection.fetch({
+                reset: true,
+                success: function() {
+                    that.updateCount();
+                    that.adminListView.render();
+                    that.trigger("resetAdminRoute");
+                }
+            });
         },
 
         updateCount: function() {

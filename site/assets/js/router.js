@@ -27,7 +27,7 @@ function($, Backbone, MapItemList, Main, AdminMain) {
             console.log("main");
             if (this.currentView) {
                 this.closeCurrentView();
-            };
+            }
             var view = new Main();
             this.setCurrentView(view);
         },
@@ -52,6 +52,10 @@ function($, Backbone, MapItemList, Main, AdminMain) {
                     }
                     var view = new AdminMain(listing);
                     that.setCurrentView(view);
+
+                    that.listenTo(view, "resetAdminRoute", function() {
+                        this.navigate("admin", { trigger: true });
+                    });
                 },
                 error: function() {
                     console.error("Something went wrong with the collection fetch.");

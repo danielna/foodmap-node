@@ -20,6 +20,7 @@ function($, Backbone, AdminListing) {
         },
 
         render: function() {
+            this.$el.html("");
             var collection = _(this.collection.sortByDateProperty("modified"));
             collection.each(function(listing) {
                 var adminListing = new AdminListing({
@@ -74,17 +75,27 @@ function($, Backbone, AdminListing) {
 
         deleteListing: function(e) {
             e.preventDefault();
+            var id = $(e.currentTarget).parents("li").attr("data-id"),
+                model = this.collection.get(id),
+                that = this;
 
-            var $this = $(event.currentTarget),
-                id = $this.attr("data-id");
-
-            this.trigger("deleteListing", id);
+            if ( confirm("Are you sure you want to delete " + model.get("name") + "?") ){
+                model.destroy({
+                    success: function(response) {
+                        console.log(response.get("name") + " deleted.");
+                        that.trigger("deleteListing");
+                    },
+                    error: function(respose) {
+                        console.error("Error deleting: " + response.get("name"));
+                    }
+                });
+            }
         },
 
         toggleListingVisible: function(e) {
             e.preventDefault();
 
-            return $(e.currentTarget).parent().siblings(".slide").toggle();
+            return $(e.currentTarget).parent().siblings(".slide").slideToggle();
         }
 
     });
