@@ -81,24 +81,27 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             formData.ethnicity = ethnicity;
             formData.tags = tags;
             this.listenTo(model, 'change', this.resetAdmin);
-            // PUT
+
             if (model) {
                 // Todo
                 // Put a cute little message saying the form was updated
-                // This callback refuses to be called.  I have no idea why.
                 model.save(formData, {
-                    success: function() {
-                        console.log("successful save!");
+                    success: function(res) {
+                        console.log("PUT. Updated model: ", res.get("name"));
                     },
-                    error: function() {
-                        console.error("error in update.");
+                    error: function(err) {
+                        console.error("Error in PUT:", err);
                     }
                 });
-
             } else {
-                // POST
-                console.log("else");
-                this.collection.create(formData);
+                this.collection.create(formData, {
+                    success: function(res) {
+                        console.log("POST. Saved model: ", res.get("name"));
+                    },
+                    error: function(err) {
+                        console.error("Error in POST:", err);
+                    }
+                });
             }
         },
 

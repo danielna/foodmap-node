@@ -96,9 +96,11 @@ app.post( '/api/listings', function( request, response ) {
 
     listing.save( function( err ) {
         if( !err ) {
-            return console.log( 'Created listing: ' + request.body.name );
+            console.log( 'Created listing: ' + request.body.name );
+            response.send(listing);
         } else {
-            return console.log( err );
+            console.log( "POST Error: ", err );
+            response.send( err );
         }
     });
     return response.send( listing );
@@ -119,9 +121,11 @@ app.put( '/api/listings/:id', function( request, response ) {
 
         return listing.save( function( err ) {
             if( !err ) {
-                return console.log( 'Updated listing: ' + request.body.name );
+                console.log( 'Updated listing: ' + request.body.name );
+                response.send(listing);
             } else {
-                return console.log( "ERROR: " + err );
+                console.log( "PUT Error: ", err );
+                response.send(err);
             }
         });
     });
