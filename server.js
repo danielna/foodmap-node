@@ -138,7 +138,7 @@ app.delete( '/api/listings/:id', function( request, response ) {
         return listing.remove( function( err ) {
             if( !err ) {
                 console.log( 'Listing removed: ' + request.body.name );
-                return response.send( '' );
+                response.send( listing );
             } else {
                 console.log( err );
             }
