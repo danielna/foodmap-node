@@ -83,9 +83,9 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             this.listenTo(model, 'change', this.resetAdmin);
             // PUT
             if (model) {
-                // Reset/redirect the form
+                // Todo
                 // Put a cute little message saying the form was updated
-                // Try to edit the same eatery multiple times -- url error.
+                // This callback refuses to be called.  I have no idea why.
                 model.save(formData, {
                     success: function() {
                         console.log("successful save!");
