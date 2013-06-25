@@ -55,8 +55,15 @@ var ListingSchema = new mongoose.Schema({
     modified: { type: Date, default: Date.now }
 });
 
+// Schema(s)
+var UserSchema = new mongoose.Schema({
+    name: String,
+    password: String
+});
+
 // Models
 var ListingModel = mongoose.model( 'Listing', ListingSchema );
+var UserModel = mongoose.model( 'User', UserSchema );
 
 // REST
 
@@ -151,6 +158,9 @@ app.delete( '/api/listings/:id', function( request, response ) {
         });
     });
 });
+
+
+// Users
 
 
 //Start server

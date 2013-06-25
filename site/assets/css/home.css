@@ -81,3 +81,35 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/* line 3, ../sass/home.scss */
+.title {
+  display: block;
+  position: relative;
+  width: 500px;
+  text-align: center;
+  margin: 50px auto;
+  color: #f2f2f2;
+}
+
+/* line 12, ../sass/home.scss */
+article.login {
+  display: block;
+  position: relative;
+  text-align: center;
+  margin: 100px auto;
+  padding: 20px 0;
+  color: #f2f2f2;
+  background-color: #444;
+}
+
+/* line 23, ../sass/home.scss */
+form .line {
+  display: block;
+  margin: 0 0 8px;
+}
+/* line 27, ../sass/home.scss */
+form label {
+  display: block;
+  margin-bottom: 2px;
+}

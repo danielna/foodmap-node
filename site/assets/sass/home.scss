@@ -1,0 +1,31 @@
+@import "core";
+
+.title {
+    display: block;
+    position: relative;
+    width: 500px;
+    text-align: center;
+    margin: 50px auto;
+    color: $color-lightgray;
+}
+
+article.login {
+    display: block;
+    position: relative;
+    text-align: center;
+    margin: 100px auto;
+    padding: 20px 0;
+    color: $color-lightgray;
+    background-color: #444;
+}
+
+form {
+    .line {
+        display: block;
+        margin: 0 0 8px;
+    }
+    label {
+        display: block;
+        margin-bottom: 2px;
+    }
+}

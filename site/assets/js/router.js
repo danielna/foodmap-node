@@ -1,13 +1,15 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/map/Main", "views/admin/AdminMain"],
+define(["jquery", "backbone", "collections/MapItemList", "views/home/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain"],
 
-function($, Backbone, MapItemList, Main, AdminMain) {
+function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain) {
 
     var foodmap = foodmap || {};
 
     foodmap.Router = Backbone.Router.extend({
 
         routes: {
-            '': 'main',
+            '': 'splash',
+            'home': 'home',
+            'map': 'map',
             'admin': 'admin',
             'admin/:id': 'adminEdit',
             '*actions': 'default'
@@ -23,12 +25,30 @@ function($, Backbone, MapItemList, Main, AdminMain) {
             alert("No designated action");
         },
 
-        main: function() {
+        splash: function() {
+            console.log("splash");
+            if (this.currentView) {
+                this.closeCurrentView();
+            }
+            var view = new Splash();
+            this.setCurrentView(view);
+        },
+
+        home: function() {
+            console.log("home");
+            if (this.currentView) {
+                this.closeCurrentView();
+            }
+            var view = new Home();
+            this.setCurrentView(view);
+        },
+
+        map: function() {
             console.log("main");
             if (this.currentView) {
                 this.closeCurrentView();
             }
-            var view = new Main();
+            var view = new MapMain();
             this.setCurrentView(view);
         },
 
