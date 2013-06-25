@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/main/Main", "views/admin/AdminMain"],
+define(["jquery", "backbone", "collections/MapItemList", "views/map/Main", "views/admin/AdminMain"],
 
 function($, Backbone, MapItemList, Main, AdminMain) {
 
@@ -42,18 +42,18 @@ function($, Backbone, MapItemList, Main, AdminMain) {
         },
 
         adminEdit: function(id) {
-            console.log("EDIT");
-            var that = this;
+            console.log("edit");
+            var self = this;
             mapItemList.fetch({
                 success: function() {
                     var listing = mapItemList.get(id);
-                    if (that.currentView) {
-                        that.closeCurrentView();
+                    if (self.currentView) {
+                        self.closeCurrentView();
                     }
                     var view = new AdminMain(listing);
-                    that.setCurrentView(view);
+                    self.setCurrentView(view);
 
-                    that.listenTo(view, "resetAdminRoute", function() {
+                    self.listenTo(view, "resetAdminRoute", function() {
                         this.navigate("admin", { trigger: true });
                     });
                 },

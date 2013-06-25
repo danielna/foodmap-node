@@ -21,6 +21,12 @@ app.configure( function() {
     //Where to serve static content
     app.use( express.static( path.join( application_root, 'site') ) );
 
+    app.use(express.cookieParser());
+    app.use(express.bodyParser());
+    app.use(express.session({ secret: 'keyboard cat' }));
+    // app.use(passport.initialize());
+    // app.use(passport.session());
+
     //Show all errors in development
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
