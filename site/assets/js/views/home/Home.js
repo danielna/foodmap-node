@@ -17,6 +17,8 @@ function($, Backbone, template, header_template) {
             this.resetContainer();
             // is this a hack?  yup.
             $("body").prepend(_.template(header_template));
+
+            // size the panels appropriately based on browser size
             var left_panel_width = 240,
                 top_bar_height = 50,
                 self = this;

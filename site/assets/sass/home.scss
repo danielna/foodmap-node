@@ -29,3 +29,76 @@ form {
         margin-bottom: 2px;
     }
 }
+
+$title-bar-height: 50px;
+#title-bar {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    @include box-sizing(border-box);
+    border-bottom: 1px solid $color-darkgray;
+    height: $title-bar-height;
+    line-height: $title-bar-height;
+    h1 {
+        display: inline-block;
+        float: left;
+        font-size: 2em;
+        margin: 0;
+        padding: 0;
+        line-height: $title-bar-height;
+    }
+    .user-menu {
+        display: inline-block;
+        float: right;
+    }
+}
+#left-panel {
+    display: block;
+    position: absolute;
+    top: $title-bar-height;
+    left: 0;
+    width: 240px;
+    background-color: $color-lightgray;
+    @include box-sizing(border-box);
+    overflow-y: auto;
+}
+#right-panel {
+    display: block;
+    position: absolute;
+    top: $title-bar-height;
+    left: 240px;
+    padding: 10px 20px;
+    background-color: $color-darkgray;
+    @include box-sizing(border-box);
+    overflow-y: auto;
+}
+
+.collapse {
+    display: block;
+    position: relative;
+    @include box-sizing(border-box);
+    width: 100%;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    .collapse-header {
+        color: white;
+        background-color: #888;
+        padding: 3px 2px;
+        font-size: 14px;
+        @include border-radius(2px);
+    }
+}
+
+.text-panel {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
+    @include border-radius(10px);
+    background-color: $color-lightgray;
+    @include box-sizing(border-box);
+}
