@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/home/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain"],
+define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain"],
 
 function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain) {
 
