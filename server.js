@@ -95,9 +95,9 @@ db.once('open', function callback (db) {
             }
         });
     });
-    //Get a single listing by id
+    //Get listing details
     app.get( '/api/listings/:id', function( request, response ) {
-        return Listing.findById( request.params.id, function( err, listing ) {
+        return Listing.findById( request.params.id , function( err, listing ) {
             if( !err ) {
                 return response.send( listing );
             } else {
@@ -120,7 +120,8 @@ db.once('open', function callback (db) {
                 lng: request.body.lng
             },
             created: date,
-            modified: date
+            modified: date,
+            map_id: request.body.map_id
         });
 
         listing.save( function( err ) {
@@ -196,6 +197,16 @@ db.once('open', function callback (db) {
             }
         });
     });
+    // Get maps for a user by user_id
+    app.get( '/api/users/:id/maps', function( request, response ) {
+        return Map.find( { user_id: request.params.id }, function( err, res ) {
+            if( !err ) {
+                return response.send( res );
+            } else {
+                return console.log( err );
+            }
+        });
+    });
 
 
 
@@ -213,6 +224,16 @@ db.once('open', function callback (db) {
     // Get a single map by id
     app.get( '/api/maps/:id', function( request, response ) {
         return Map.findById( request.params.id, function( err, res ) {
+            if( !err ) {
+                return response.send( res );
+            } else {
+                return console.log( err );
+            }
+        });
+    });
+    // Get listings for a map by map_id
+    app.get( '/api/maps/:id/listings', function( request, response ) {
+        return Listing.find({ map_id: request.params.id }, function( err, res ) {
             if( !err ) {
                 return response.send( res );
             } else {
@@ -302,8 +323,7 @@ app.listen( port, function() {
 });
 
 // db.maps.find().pretty()
-// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51cb3d50147876062c000004") } }, { multi: true })
-// db.listings.find({tags:"BestOf"}.pretty();
-// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51cb3d50147876062c000005") } }, { multi: true })
-// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51cb3d50147876062c000006") } }, { multi: true })
+// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51cb51f87268d88734000001") } }, { multi: true })
+// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51cb51f87268d88734000002") } }, { multi: true })
+// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51cb51f87268d88734000003") } }, { multi: true })
 // db.listings.find( { $or: [ {tags:"BestOf"}, {tags:"Burgers"}, {tags:"Pizza"} ] }).pretty()
