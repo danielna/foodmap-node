@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "models/MapItem", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
+define(["jquery", "backbone", "models/Listing", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
 
-function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) {
+function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) {
 
     var foodmap = foodmap || {};
 
@@ -27,7 +27,7 @@ function($, Backbone, MapItem, MapItemList, AdminForm, AdminListView, template) 
             if (model) {
                 this.model = model;
             } else {
-                this.model = new MapItem();
+                this.model = new Listing();
             }
 
             this.adminForm = new AdminForm({

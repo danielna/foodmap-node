@@ -1,12 +1,12 @@
 
-define(["jquery", "backbone", "models/MapItem"],
-    function($, Backbone, MapItem) {
+define(["jquery", "backbone", "models/Listing"],
+    function($, Backbone, Listing) {
 
         var foodmap = foodmap || {};
 
         foodmap.MapItemList = Backbone.Collection.extend({
 
-            model: MapItem,
+            model: Listing,
 
             // url: "/assets/resources/eateries.json",
             url: '/api/listings',
