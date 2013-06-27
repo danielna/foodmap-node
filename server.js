@@ -134,6 +134,18 @@ db.once('open', function callback (db) {
         if(error) { console.log(error); }
     });
 
+    // var bestof = { tags: 'BestOf' },
+    //     burgers = { tags:'Burgers'},
+    //     pizza = { tags:'Pizza'},
+    //     update1 = { $set: { map_id: bobMap.id }},
+    //     update2 = { $set: { map_id: carlMap.id }},
+    //     update3 = { $set: { map_id: lennyMap.id }},
+    //     options = { multi: true };
+
+    // Listing.update(bestof, update, options, function(err, foo) {});
+    // Listing.update(burgers, update2, options, function(err, foo) {});
+    // Listing.update(pizza, update3, options, function(err, foo) {});
+
     // User.find(function (err, res) {
     //   if (err) {
     //     console.log("error");
@@ -298,7 +310,6 @@ app.delete( '/api/listings/:id', function( request, response ) {
 // Get all users
 app.get( '/api/users', function( request, response ) {
     if (request.user.id) {
-        console.log("request.user:", request.user);
         return User.findById( request.user.id, function( err, res ) {
             if( !err ) {
                 return response.send( res );
@@ -379,6 +390,7 @@ var port = 4711;
 app.listen( port, function() {
     console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
+
 
 // db.maps.find().pretty()
 // db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51cc4fc56f955c3a12000001") } }, { multi: true })
