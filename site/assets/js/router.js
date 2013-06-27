@@ -9,7 +9,7 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User) {
         routes: {
             '': 'splash',
             'home': 'home',
-            'map': 'map',
+            'map/:id': 'map',
             'admin': 'admin',
             'admin/:id': 'adminEdit',
             '*actions': 'default'
@@ -50,12 +50,12 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User) {
 
         },
 
-        map: function() {
+        map: function(id) {
             console.log("main");
             if (this.currentView) {
                 this.closeCurrentView();
             }
-            var view = new MapMain();
+            var view = new MapMain({map_id: id});
             this.setCurrentView(view);
         },
 
