@@ -336,22 +336,20 @@ app.get( '/api/users/:id', function( request, response ) {
         }
     });
 });
-// Get maps for a user by user_id
-app.get( '/api/users/:id/maps', function( request, response ) {
-    return Map.find( { user_id: request.params.id }, function( err, res ) {
-        if( !err ) {
-            return response.send( res );
-        } else {
-            return console.log( err );
-        }
-    });
-});
-
 
 
 //// MAPS
 // Get all maps
 app.get( '/api/maps', function( request, response ) {
+    if (request.user.id) {
+        return Map.find( {"user_id": request.user.id }, function( err, res ) {
+            if( !err ) {
+                return response.send( res );
+            } else {
+                return console.log( err );
+            }
+        });
+    }
     return Map.find( function( err, res ) {
         if( !err ) {
             return response.send( res );
@@ -370,18 +368,6 @@ app.get( '/api/maps/:id', function( request, response ) {
         }
     });
 });
-// Get listings for a map by map_id
-app.get( '/api/maps/:id/listings', function( request, response ) {
-    return Listing.find({ map_id: request.params.id }, function( err, res ) {
-        if( !err ) {
-            return response.send( res );
-        } else {
-            return console.log( err );
-        }
-    });
-});
-
-
 
 
 
