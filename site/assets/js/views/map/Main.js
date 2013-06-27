@@ -4,7 +4,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
 
     var foodmap = foodmap || {};
 
-    foodmap.Main = Backbone.View.extend({
+    foodmap.MapMain = Backbone.View.extend({
 
         el: "body",
 
@@ -27,15 +27,15 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
 
             this.childViews = [];
 
-            foodmap.MapList = new MapItemList();
+            this.collection = new MapItemList(this.map_id);
             this.map = new MapView({
-                collection: foodmap.MapList
+                collection: this.collection
             });
             this.listingContainerView = new ListingContainerView({
-                collection: foodmap.MapList
+                collection: this.collection
             }),
             this.tagsView = new TagsView({
-                collection: foodmap.MapList
+                collection: this.collection
             }),
 
             this.childViews.push(this.map);
@@ -46,7 +46,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
             this.listenTo(this.listingContainerView, "clickListing", this.clickListing);
             this.listenTo(this.tagsView, "clickTag", this.clickTag);
 
-            foodmap.MapList.fetch({
+            this.collection.fetch({
                 reset: true
             });
         },
@@ -125,6 +125,6 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
 
     });
 
-    return foodmap.Main;
+    return foodmap.MapMain;
 
 });
