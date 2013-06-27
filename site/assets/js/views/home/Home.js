@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html"],
+define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html", "collections/MapsList", "views/home/MapsListView"],
 
-function($, Backbone, template, header_template) {
+function($, Backbone, template, header_template, MapsList, MapsListView) {
 
     var foodmap = foodmap || {};
 
@@ -17,6 +17,8 @@ function($, Backbone, template, header_template) {
             this.resetContainer();
             this.childViews = [];
             this.user = user;
+
+            
 
             // size the panels appropriately based on browser size
             var left_panel_width = 240,
@@ -44,6 +46,15 @@ function($, Backbone, template, header_template) {
 
             $(window).trigger("resize");
 
+            this.collection = new MapsList();
+            this.mapsListView = new MapsListView({
+                collection: this.collection
+            });
+            this.collection.fetch({
+                reset: true
+            });
+
+            this.childViews.push(this.mapsListView);
         },
 
         resetContainer: function() {
