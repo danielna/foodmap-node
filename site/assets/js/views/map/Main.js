@@ -18,8 +18,9 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
             "click #js-btn-admin": "redirectToAdmin"
         },
 
-        initialize: function() {
+        initialize: function(options) {
             this.resetContainer();
+            this.map_id = options.map_id;
 
             this.$container_welcome = this.$app_container.find(_globals.container_welcome);
             this.$tags = this.$app_container.find(".tags .tag");
@@ -27,7 +28,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
 
             this.childViews = [];
 
-            this.collection = new MapItemList(this.map_id);
+            this.collection = new MapItemList({ 'map_id': this.map_id });
             this.map = new MapView({
                 collection: this.collection
             });
