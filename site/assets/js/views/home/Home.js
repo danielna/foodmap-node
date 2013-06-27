@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html", "models/User"],
+define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html"],
 
-function($, Backbone, template, header_template, User) {
+function($, Backbone, template, header_template) {
 
     var foodmap = foodmap || {};
 
@@ -13,22 +13,18 @@ function($, Backbone, template, header_template, User) {
         events: {
         },
 
-        initialize: function() {
+        initialize: function(user) {
             this.resetContainer();
             this.childViews = [];
+            this.user = user;
 
             // size the panels appropriately based on browser size
             var left_panel_width = 240,
                 top_bar_height = 50,
                 self = this;
 
-            this.user = new User();
-            this.user.fetch({
-                success: function(response) {
-                    self.populateChildViews();
-                    $(window).trigger("resize");
-                }
-            });
+            this.populateChildViews();
+            $(window).trigger("resize");
 
             this.$title_bar = $("#title-bar");
             this.$left_panel = $("#left-panel");
@@ -63,13 +59,10 @@ function($, Backbone, template, header_template, User) {
         },
 
         populateChildViews: function() {
-            // oh so hacky
-            var thisUser = this.user.get("0");
-            // console.log("this.user:", this.user.get("0"));
-            this.$el.html(this.template(thisUser));
+            this.$el.html(this.template( this.user.toJSON() ));
             // is this a hack?  yup.
             var headerTemplate = _.template(header_template);
-            $("body").prepend( headerTemplate( thisUser ));
+            $("body").prepend( headerTemplate( this.user.toJSON() ));
         }
     });
 
