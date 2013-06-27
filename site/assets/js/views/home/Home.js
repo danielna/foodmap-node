@@ -18,8 +18,6 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
             this.childViews = [];
             this.user = user;
 
-            
-
             // size the panels appropriately based on browser size
             var left_panel_width = 240,
                 top_bar_height = 50,
