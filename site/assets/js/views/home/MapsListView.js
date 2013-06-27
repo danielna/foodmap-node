@@ -9,6 +9,7 @@ function($, Backbone, map_template) {
         el: "#maps-list",
 
         events: {
+            "click .map-name": "loadMap",
             "click .map-edit": "editListing",
             "click .map-delete": "deleteListing"
         },
@@ -51,6 +52,13 @@ function($, Backbone, map_template) {
             //         }
             //     });
             // }
+        },
+
+        loadMap: function(e) {
+            e.preventDefault();
+            var id = $(e.currentTarget).parents(".map-panel-item").attr("data-map-id");
+
+            window.location = "/#/map/" + id;
         }
 
     });
