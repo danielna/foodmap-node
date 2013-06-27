@@ -8,9 +8,10 @@ define(["jquery", "backbone", "models/Listing"],
 
             model: Listing,
 
-            url: '/api/listings',
+            url: '/api/maps/' + this.map_id + '/listings',
 
-            initialize: function() {
+            initialize: function(map_id) {
+                this.map_id = map_id;
             },
 
             // Return unique tags for the collection as an array
