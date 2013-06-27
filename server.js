@@ -168,7 +168,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findOne(id, function (err, user) {
+  User.findOne( {'_id':id} , function (err, user) {
     done(err, user);
   });
 });
@@ -179,7 +179,7 @@ passport.use(new LocalStrategy(
   },
   function(username, password, done) {
     User.findOne({ email: username }, function (err, user) {
-      // if (err) { return done(err); }
+      if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' });
       }
@@ -294,8 +294,19 @@ app.delete( '/api/listings/:id', function( request, response ) {
 
 
 //// USERS
+
 // Get all users
 app.get( '/api/users', function( request, response ) {
+    if (request.user.id) {
+        console.log("request.user:", request.user);
+        return User.findById( request.user.id, function( err, res ) {
+            if( !err ) {
+                return response.send( res );
+            } else {
+                return console.log( err );
+            }
+        });
+    }
     return User.find( function( err, res ) {
         if( !err ) {
             return response.send( res );
