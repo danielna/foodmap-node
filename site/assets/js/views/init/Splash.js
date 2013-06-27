@@ -10,14 +10,11 @@ function($, Backbone, template) {
 
         template: _.template(template),
 
-        events: {
-            "click #submit": "login"
-        },
+        events: {},
 
         initialize: function() {
             this.resetContainer();
             // this.childViews = [];
-
         },
 
         resetContainer: function() {
@@ -31,11 +28,6 @@ function($, Backbone, template) {
             _.each(this.childViews, function(childView) {
                 childView.remove();
             });
-        },
-
-        login: function(e) {
-            e.preventDefault();
-            window.location = "/#/home";
         }
 
     });
