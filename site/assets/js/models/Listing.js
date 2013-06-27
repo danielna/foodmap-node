@@ -4,7 +4,7 @@ function($, Backbone) {
 
     var foodmap = foodmap || {};
 
-    foodmap.MapItem = Backbone.Model.extend({
+    foodmap.Listing = Backbone.Model.extend({
 
         urlRoot: '/api/listings',
 
@@ -17,5 +17,5 @@ function($, Backbone) {
 
     });
 
-    return foodmap.MapItem;
+    return foodmap.Listing;
 });

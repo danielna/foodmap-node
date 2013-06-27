@@ -1,18 +1,17 @@
 
-define(["jquery", "backbone", "models/MapItem"],
-    function($, Backbone, MapItem) {
+define(["jquery", "backbone", "models/Listing"],
+    function($, Backbone, Listing) {
 
         var foodmap = foodmap || {};
 
         foodmap.MapItemList = Backbone.Collection.extend({
 
-            model: MapItem,
+            model: Listing,
 
-            // url: "/assets/resources/eateries.json",
-            url: '/api/listings',
+            url: '/api/maps/' + this.map_id + '/listings',
 
-            initialize: function() {
-                // console.log("collection init");
+            initialize: function(map_id) {
+                this.map_id = map_id;
             },
 
             // Return unique tags for the collection as an array
