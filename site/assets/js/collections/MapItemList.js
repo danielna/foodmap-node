@@ -8,11 +8,9 @@ define(["jquery", "backbone", "models/Listing"],
 
             model: Listing,
 
-            // url: "/assets/resources/eateries.json",
             url: '/api/listings',
 
             initialize: function() {
-                // console.log("collection init");
             },
 
             // Return unique tags for the collection as an array
