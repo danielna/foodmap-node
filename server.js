@@ -200,7 +200,7 @@ app.post('/login',
   function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    res.redirect('/#/home/');
+    res.redirect('/#/home');
   });
 
 //// LISTINGS
