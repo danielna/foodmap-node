@@ -111,16 +111,19 @@ db.once('open', function callback (db) {
     var bobMap = new Map({
         name: "bob's map",
         user_id: bob._id,
+        description: "this is BOB's map!!!!",
         welcome_message: "oh shit it's bob's map"
     });
     var carlMap = new Map({
         name: "carl's map",
-        user_id: carl._id,
+        user_id: bob._id,
+        description: "this is CARL's map!!!!",
         welcome_message: "oh shit it's carl's map"
     });
     var lennyMap = new Map({
         name: "lenny's map",
-        user_id: lenny._id,
+        user_id: bob._id,
+        description: "this is LENNY's map!!!!",
         welcome_message: "oh shit it's lenny's map"
     });
 
@@ -211,6 +214,21 @@ app.post('/login',
     res.redirect('/#/home');
   });
 
+
+/* app.get('/maps/:id/listings', function(req, res, next){
+   // Listing.filterByMap({ mapId : id } , function(err, data){
+    if (err) return next(new Error(err));
+    res.send(data);
+   })
+   // fikter alll listig w that map
+});
+
+*/
+
+// var Listing = require('./models/Listing');
+// Listings.filterByMap(:id, fn(err, data){
+// ...
+// })
 
 
 //// LISTINGS
@@ -368,6 +386,18 @@ app.get( '/api/maps/:id', function( request, response ) {
         }
     });
 });
+// Get a single map by id
+app.get( '/api/maps/:id/listings', function( request, response ) {
+    console.log("id:", request.params.id);
+    return Listing.find( {"map_id": request.params.id} , function( err, res ) {
+        if( !err ) {
+            return response.send( res );
+        } else {
+            return console.log( err );
+        }
+    });
+});
+
 
 
 
@@ -379,7 +409,7 @@ app.listen( port, function() {
 
 
 // db.maps.find().pretty()
-// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51cc4fc56f955c3a12000001") } }, { multi: true })
-// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51cc4fc56f955c3a12000002") } }, { multi: true })
-// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51cc4fc56f955c3a12000003") } }, { multi: true })
+// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000004") } }, { multi: true })
+// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000005") } }, { multi: true })
+// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000006") } }, { multi: true })
 // db.listings.find( { $or: [ {tags:"BestOf"}, {tags:"Burgers"}, {tags:"Pizza"} ] }).pretty()
