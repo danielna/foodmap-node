@@ -58,7 +58,7 @@ function($, Backbone, map_template) {
             e.preventDefault();
             var id = $(e.currentTarget).parents(".map-panel-item").attr("data-map-id");
 
-            window.location = "/#/map/" + id;
+            window.open("/#/map/" + id, '_blank');
         }
 
     });
