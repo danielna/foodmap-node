@@ -21,14 +21,14 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         initialize: function(options) {
             this.resetContainer();
             this.map_id = options.map_id;
+            this.childViews = [];
 
             this.$container_welcome = this.$app_container.find(_globals.container_welcome);
             this.$tags = this.$app_container.find(".tags .tag");
             this.$body = this.$el;
 
-            this.childViews = [];
-
             this.collection = new MapItemList({ 'map_id': this.map_id });
+
             this.map = new MapView({
                 collection: this.collection
             });
