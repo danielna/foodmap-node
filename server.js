@@ -409,7 +409,7 @@ app.listen( port, function() {
 
 
 // db.maps.find().pretty()
-// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000004") } }, { multi: true })
-// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000005") } }, { multi: true })
-// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51ccc28d81fb22ec59000006") } }, { multi: true })
+// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51cd002644dd57df16000004") } }, { multi: true })
+// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51cd002644dd57df16000005") } }, { multi: true })
+// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51cd002644dd57df16000006") } }, { multi: true })
 // db.listings.find( { $or: [ {tags:"BestOf"}, {tags:"Burgers"}, {tags:"Pizza"} ] }).pretty()
