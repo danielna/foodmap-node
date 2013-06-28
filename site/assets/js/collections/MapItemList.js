@@ -8,7 +8,9 @@ define(["jquery", "backbone", "models/Listing"],
 
             model: Listing,
 
-            url: '/api/maps/' + this.map_id + '/listings',
+            url: function() {
+                return '/api/maps/' + this.map_id + '/listings';
+            },
 
             initialize: function(options) {
                 if (options) {
