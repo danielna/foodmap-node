@@ -53,6 +53,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         },
 
         resetContainer: function() {
+            this.$el.find("#title-bar").remove();
             this.$app_container = this.$el.find(".app-container");
             this.$app_container.html(this.template);
         },
