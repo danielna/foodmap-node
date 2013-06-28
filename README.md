@@ -11,4 +11,4 @@ Technologies used include:
 * CSS: SASS/Compass
 * Front-end: jQuery, Google Maps API + InfoBox.js
 
-Special thanks to this tutorial for getting me started: [Developing Backbone.js Applications](http://addyosmani.github.io/backbone-fundamentals) by Addy Osmani
+Special thanks to this ebook: [Developing Backbone.js Applications](http://addyosmani.github.io/backbone-fundamentals) by Addy Osmani
