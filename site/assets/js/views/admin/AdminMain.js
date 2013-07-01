@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "models/Listing", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
+define(["jquery", "backbone", "models/Listing", "models/Map", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
 
-function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) {
+function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, template) {
 
     var foodmap = foodmap || {};
 
@@ -19,8 +19,17 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
             var self = this;
             this.map_id = options.map_id;
 
-            this.resetContainer();
+            this.map = new Map({ 'map_id': this.map_id });
+            this.map.fetch({
+                reset: true,
+                success: function() {
+                    self.resetContainer();
+                    self.createChildViews(options);
+                }
+            });
+        },
 
+        createChildViews: function(options) {
             this.childViews = [];
 
             this.$form = this.$app_container.find("#add-listing");
@@ -71,7 +80,7 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
 
         resetContainer: function() {
             this.$app_container = this.$el;
-            this.$app_container.html(this.template);
+            this.$app_container.html(this.template(this.map.toJSON()));
         },
 
         resetView: function() {

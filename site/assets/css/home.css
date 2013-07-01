@@ -152,7 +152,12 @@ form label {
   border-radius: 2px;
 }
 
-/* line 99, ../sass/home.scss */
+/* line 98, ../sass/home.scss */
+a.hideshow {
+  display: inline-block;
+}
+
+/* line 102, ../sass/home.scss */
 .text-panel {
   display: block;
   position: relative;

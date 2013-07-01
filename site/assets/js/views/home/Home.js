@@ -86,6 +86,7 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
         },
 
         editMap: function(id) {
+            
             if (this.mainPanelView){
                 this.mainPanelView.close();
             }

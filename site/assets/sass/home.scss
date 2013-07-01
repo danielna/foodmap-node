@@ -95,6 +95,9 @@ $title-bar-height: 50px;
         @include border-radius(2px);
     }
 }
+a.hideshow {
+    display: inline-block;
+}
 
 .text-panel {
     display: block;

@@ -11,7 +11,7 @@ function($, Backbone, AdminListing) {
         events: {
             "click .model-edit": "editListing",
             "click .model-delete": "deleteListing",
-            "click .collapse": "toggleListingVisible"
+            "click .hideShow": "toggleListingVisible"
         },
 
         initialize: function() {
