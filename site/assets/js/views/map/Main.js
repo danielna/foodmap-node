@@ -22,6 +22,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
             this.resetContainer();
             this.map_id = options.map_id;
             this.childViews = [];
+            var self = this;
 
             this.$container_welcome = this.$app_container.find(_globals.container_welcome);
             this.$tags = this.$app_container.find(".tags .tag");
@@ -48,7 +49,10 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
             this.listenTo(this.tagsView, "clickTag", this.clickTag);
 
             this.collection.fetch({
-                reset: true
+                reset: true,
+                success: function() {
+                    self.map.resetZoom();
+                }
             });
         },
 
