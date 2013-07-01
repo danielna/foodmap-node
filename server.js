@@ -20,10 +20,10 @@ app.configure( function() {
     app.use(express.session({ secret: 'eat maps' }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use( express.methodOverride() );
-    app.use( app.router );
+    app.use(express.methodOverride());
+    app.use(app.router);
     //Show all errors in development
-    app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 
@@ -172,12 +172,6 @@ db.once('open', function callback (db) {
 
 
 
-// Routes
-app.get( '/api', function( request, response ) {
-    response.send( 'Library API is running' );
-});
-
-
 // Passport / Auth
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -215,31 +209,32 @@ app.post('/login',
     res.redirect('/#/home');
 });
 
-app.get('/logout', function(req, res){
+app.get('/logout', ensureAuthenticated(), function(req, res){
   req.logout();
   res.redirect('/');
 });
 
+function ensureAuthenticated() {
+    return function(req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            res.redirect('/');
+        }
+    };
+}
 
-/* app.get('/maps/:id/listings', function(req, res, next){
-   // Listing.filterByMap({ mapId : id } , function(err, data){
-    if (err) return next(new Error(err));
-    res.send(data);
-   })
-   // fikter alll listig w that map
+
+
+
+// Routes
+app.get( '/api', ensureAuthenticated(), function( request, response ) {
+    response.send( 'Library API is running' );
 });
-
-*/
-
-// var Listing = require('./models/Listing');
-// Listings.filterByMap(:id, fn(err, data){
-// ...
-// })
-
 
 //// LISTINGS
 // Get all listings
-app.get( '/api/listings', function( request, response ) {
+app.get( '/api/listings', ensureAuthenticated(), function( request, response ) {
     return Listing.find( function( err, listings ) {
         if( !err ) {
             return response.send( listings );
@@ -249,7 +244,7 @@ app.get( '/api/listings', function( request, response ) {
     });
 });
 //Get listing details
-app.get( '/api/listings/:id', function( request, response ) {
+app.get( '/api/listings/:id', ensureAuthenticated(), function( request, response ) {
     return Listing.findById( request.params.id , function( err, listing ) {
         if( !err ) {
             return response.send( listing );
@@ -259,7 +254,7 @@ app.get( '/api/listings/:id', function( request, response ) {
     });
 });
 // Insert a new listing
-app.post( '/api/listings', function( request, response ) {
+app.post( '/api/listings', ensureAuthenticated(), function( request, response ) {
     var date = new Date();
 
     var listing = new Listing({
@@ -289,7 +284,7 @@ app.post( '/api/listings', function( request, response ) {
     return response.send( listing );
 });
 // Update a listing
-app.put( '/api/listings/:id', function( request, response ) {
+app.put( '/api/listings/:id', ensureAuthenticated(), function( request, response ) {
     console.log( 'Updating listing ' + request.body.name );
     return Listing.findById( request.params.id, function( err, listing ) {
         listing.name = request.body.name,
@@ -313,7 +308,7 @@ app.put( '/api/listings/:id', function( request, response ) {
     });
 });
 // Delete a listing
-app.delete( '/api/listings/:id', function( request, response ) {
+app.delete( '/api/listings/:id', ensureAuthenticated(), function( request, response ) {
     console.log( 'Deleting listing with id: ' + request.params.id );
     return Listing.findById( request.params.id, function( err, listing ) {
         return listing.remove( function( err ) {
@@ -332,7 +327,7 @@ app.delete( '/api/listings/:id', function( request, response ) {
 //// USERS
 
 // Get all users
-app.get( '/api/users', function( request, response ) {
+app.get( '/api/users', ensureAuthenticated(), function( request, response ) {
     if (request.user.id) {
         return User.findById( request.user.id, function( err, res ) {
             if( !err ) {
@@ -351,7 +346,7 @@ app.get( '/api/users', function( request, response ) {
     });
 });
 // Get a single user by id
-app.get( '/api/users/:id', function( request, response ) {
+app.get( '/api/users/:id', ensureAuthenticated(), function( request, response ) {
     return User.findById( request.params.id, function( err, res ) {
         if( !err ) {
             return response.send( res );
@@ -364,7 +359,7 @@ app.get( '/api/users/:id', function( request, response ) {
 
 //// MAPS
 // Get all maps
-app.get( '/api/maps', function( request, response ) {
+app.get( '/api/maps', ensureAuthenticated(), function( request, response ) {
     if (request.user.id) {
         return Map.find( {"user_id": request.user.id }, function( err, res ) {
             if( !err ) {
@@ -383,7 +378,7 @@ app.get( '/api/maps', function( request, response ) {
     });
 });
 // Get a single map by id
-app.get( '/api/maps/:id', function( request, response ) {
+app.get( '/api/maps/:id', ensureAuthenticated(), function( request, response ) {
     return Map.findById( request.params.id, function( err, res ) {
         if( !err ) {
             return response.send( res );
@@ -393,7 +388,7 @@ app.get( '/api/maps/:id', function( request, response ) {
     });
 });
 // Get a single map by id
-app.get( '/api/maps/:id/listings', function( request, response ) {
+app.get( '/api/maps/:id/listings', ensureAuthenticated(), function( request, response ) {
     return Listing.find( {"map_id": request.params.id} , function( err, res ) {
         if( !err ) {
             return response.send( res );
