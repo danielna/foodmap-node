@@ -138,31 +138,17 @@ db.once('open', function callback (db) {
         if(error) { console.log(error); }
     });
 
-    // var bestof = { tags: 'BestOf' },
-    //     burgers = { tags:'Burgers'},
-    //     pizza = { tags:'Pizza'},
-    //     update1 = { $set: { map_id: bobMap.id }},
-    //     update2 = { $set: { map_id: carlMap.id }},
-    //     update3 = { $set: { map_id: lennyMap.id }},
-    //     options = { multi: true };
+    var bestof = { tags: 'BestOf' },
+        burgers = { tags:'Burgers'},
+        pizza = { tags:'Pizza'},
+        update1 = { $set: { map_id: bobMap.id }},
+        update2 = { $set: { map_id: carlMap.id }},
+        update3 = { $set: { map_id: lennyMap.id }},
+        options = { multi: true };
 
-    // Listing.update(bestof, update, options, function(err, foo) {});
-    // Listing.update(burgers, update2, options, function(err, foo) {});
-    // Listing.update(pizza, update3, options, function(err, foo) {});
-
-    // User.find(function (err, res) {
-    //   if (err) {
-    //     console.log("error");
-    //   } // TODO handle err
-    //   console.log(res);
-    // });
-
-    // Map.find(function (err, res) {
-    //   if (err) {
-    //     console.log("error");
-    //   } // TODO handle err
-    //   console.log(res);
-    // });
+    Listing.update(bestof, update1, options, function(err, foo) {});
+    Listing.update(burgers, update2, options, function(err, foo) {});
+    Listing.update(pizza, update3, options, function(err, foo) {});
 
 });
 
