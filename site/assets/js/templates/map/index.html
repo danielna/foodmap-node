@@ -14,12 +14,11 @@
 
 <article id="top-bar">
     <button id="js-btn-menu" class="button gray" title="Filters">&laquo; Show</button>
-    <h1 class="page-title">Notable NOVA Eateries</h1>
+    <h1 class="page-title"><%= name %></h1>
     <button id="js-btn-reset" class="button blue" title="Reset Map">Reset Map</button>
     <button id="js-btn-welcome" class="button blue" title="Show welcome message">Welcome</button>
     <button id="js-btn-admin" class="button orange" title="Admin">Admin</button>
-    <span class="right">Last updated 6/2013 | Works best in Chrome/Safari</span>
-    <a class="header-link" href="http://blog.danielna.com/2013/03/12/where-to-eat-in-northern-va.html" title="Where to Eat in Northern Virginia" target="_blank">What the heck is this?!</a>
+    <span class="right">Updated <%= modified %>, Created <%= created %> | Works best in Chrome/Safari</span>
 </article>
 
 <article id="container-map">
@@ -38,16 +37,8 @@
         close
     </span>
     <p>
-        Applicable demographic information that will help to explain the selection of eateries on this map:
+        <%= welcome_message %>
     </p>
-    <ul>
-        <li>20-something</li>
-        <li>Employed full-time</li>
-        <li>Asian descent</li>
-        <li>Will pay for quality, but rarely over $30</li>
-        <li>Otherwise, cheap eats are preferred almost always</li>
-        <li>Partial to ethnic eateries</li>
-    </ul>
     <p>Color scheme:</p>
     <ul>
         <li><span class="color-low">Green</span>: Cheap (<= $10)</li>
@@ -55,12 +46,6 @@
         <li><span class="color-high">Red</span>: Expensive (> $25)</li>
     </ul>
     <p>
-        Within the color scheme the restaurants are generally ordered by preference. I'm also intentionally omitting most common food chains, which is why Red Robin is not on this list.  But I've got love for Red Robin.
-    </p>
-    <p>
         Current best restaurants are denoted by a <img style="vertical-align: middle;" src="assets/img/star.png" title="Star"/>.
-    </p>
-    <p>
-        There will be rolling updates to this list.
     </p>
 </div>

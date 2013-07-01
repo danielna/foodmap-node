@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/map/MapView", "views/map/ListingContainerView", "views/map/TagsView", "foodmap.globals", "text!templates/map/index.html"],
+define(["jquery", "backbone", "collections/MapItemList", "views/map/MapView", "views/map/ListingContainerView", "views/map/TagsView", "models/Map", "foodmap.globals", "text!templates/map/index.html"],
 
-function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _globals, template) {
+function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, Map, _globals, template) {
 
     var foodmap = foodmap || {};
 
@@ -19,10 +19,21 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         },
 
         initialize: function(options) {
-            this.resetContainer();
-            this.map_id = options.map_id;
-            this.childViews = [];
             var self = this;
+            this.map_id = options.map_id;
+            this.model = new Map({ 'map_id': this.map_id });
+            this.model.fetch({
+                reset: true,
+                success: function(){
+                    self.resetContainer();
+                    self.setChildViews();
+                }
+            });
+        },
+
+        setChildViews: function() {
+            var self = this;
+            this.childViews = [];
 
             this.$container_welcome = this.$app_container.find(_globals.container_welcome);
             this.$tags = this.$app_container.find(".tags .tag");
@@ -59,7 +70,8 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, _glo
         resetContainer: function() {
             this.$el.find("#title-bar").remove();
             this.$app_container = this.$el.find(".app-container");
-            this.$app_container.html(this.template);
+            console.log("this.model.toJSON()", this.model.toJSON());
+            this.$app_container.html(this.template(this.model.toJSON()));
         },
 
         toggleWelcome: function() {

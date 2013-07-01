@@ -10,6 +10,12 @@ function($, Backbone) {
 
         idAttribute: "_id",
 
+        initialize: function(options) {
+            if (options) {
+                this.id = options.map_id;
+            }
+        },
+
         parse: function(response) {
             response.id = response._id;
             return response;
