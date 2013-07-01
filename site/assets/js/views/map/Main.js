@@ -14,9 +14,7 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, Map,
             "click #js-btn-welcome": "toggleWelcome",
             "click #js-close-welcome": "toggleWelcome",
             "click #js-btn-reset": "onReset",
-            "click #js-btn-menu": "toggleLeftMenu",
-            "click #js-btn-admin": "redirectToAdmin"
-        },
+            "click #js-btn-menu": "toggleLeftMenu"        },
 
         initialize: function(options) {
             var self = this;
@@ -131,10 +129,6 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, Map,
         clickTag: function(id) {
             var active_markers = this.map.filterMarkersByTag(id);
             this.listingContainerView.filterListingsByArray(active_markers);
-        },
-
-        redirectToAdmin: function() {
-            window.location = "#/admin";
         },
 
         close: function() {
