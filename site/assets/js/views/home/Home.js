@@ -11,7 +11,7 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
 
         template: _.template(template),
 
-        events: {},        },
+        events: {},
 
         initialize: function(user) {
             this.resetContainer();
