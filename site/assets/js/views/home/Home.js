@@ -6,12 +6,12 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
 
     foodmap.Home = Backbone.View.extend({
 
+        // GAH refactor this just to be body.  this won't work.
         el: ".app-container",
 
         template: _.template(template),
 
-        events: {
-        },
+        events: {},        },
 
         initialize: function(user) {
             this.resetContainer();
@@ -68,10 +68,15 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
         },
 
         populateChildViews: function() {
+            var self = this;
             this.$el.html(this.template( this.user.toJSON() ));
             // is this a hack?  yup.
             var headerTemplate = _.template(header_template);
             $("body").prepend( headerTemplate( this.user.toJSON() ));
+
+            $("#logout").on("click", function(e) {
+                window.location = "/logout";
+            });
         }
     });
 

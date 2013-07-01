@@ -94,8 +94,13 @@ form label {
   display: inline-block;
   float: right;
 }
+/* line 56, ../sass/home.scss */
+#title-bar .user-menu a#logout {
+  color: #0095cd;
+  text-decoration: none;
+}
 
-/* line 58, ../sass/home.scss */
+/* line 62, ../sass/home.scss */
 #left-panel {
   display: block;
   position: absolute;
@@ -109,7 +114,7 @@ form label {
   overflow-y: auto;
 }
 
-/* line 68, ../sass/home.scss */
+/* line 72, ../sass/home.scss */
 #right-panel {
   display: block;
   position: absolute;
@@ -123,7 +128,7 @@ form label {
   overflow-y: auto;
 }
 
-/* line 79, ../sass/home.scss */
+/* line 83, ../sass/home.scss */
 .collapse {
   display: block;
   position: relative;
@@ -134,7 +139,7 @@ form label {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 }
-/* line 86, ../sass/home.scss */
+/* line 90, ../sass/home.scss */
 .collapse .collapse-header {
   color: white;
   background-color: #888;
@@ -147,7 +152,7 @@ form label {
   border-radius: 2px;
 }
 
-/* line 95, ../sass/home.scss */
+/* line 99, ../sass/home.scss */
 .text-panel {
   display: block;
   position: relative;

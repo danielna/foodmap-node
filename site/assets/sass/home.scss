@@ -53,6 +53,10 @@ $title-bar-height: 50px;
     .user-menu {
         display: inline-block;
         float: right;
+        a#logout {
+            color: $color-blue;
+            text-decoration: none;
+        }
     }
 }
 #left-panel {

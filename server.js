@@ -56,7 +56,8 @@ var MapSchema = new mongoose.Schema({
     created: { type: Date, default: Date.now },
     modified: { type: Date, default: Date.now },
     user_id: {type: Schema.Types.ObjectId, ref: 'User'},
-    welcome_message: String
+    welcome_message: String,
+    description: String
 });
 
 // Models
@@ -212,7 +213,12 @@ app.post('/login',
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     res.redirect('/#/home');
-  });
+});
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
 /* app.get('/maps/:id/listings', function(req, res, next){
@@ -408,7 +414,7 @@ app.listen( port, function() {
 
 
 // db.maps.find().pretty()
-// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51d19b8b591b163207000004") } }, { multi: true })
-// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51d19b8b591b163207000005") } }, { multi: true })
-// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51d19b8b591b163207000006") } }, { multi: true })
+// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000004") } }, { multi: true })
+// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000005") } }, { multi: true })
+// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000006") } }, { multi: true })
 // db.listings.find( { $or: [ {tags:"BestOf"}, {tags:"Burgers"}, {tags:"Pizza"} ] }).pretty()
