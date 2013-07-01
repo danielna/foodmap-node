@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html", "collections/MapsList", "views/home/MapsListView"],
+define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html", "collections/MapsList", "views/home/MapsListView", "views/admin/AdminMain"],
 
-function($, Backbone, template, header_template, MapsList, MapsListView) {
+function($, Backbone, template, header_template, MapsList, MapsListView, AdminMain) {
 
     var foodmap = foodmap || {};
 
@@ -53,10 +53,15 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
             });
 
             this.childViews.push(this.mapsListView);
+
+            this.mainPanelView = null;
+            this.mapsListView.on("editMap", this.editMap);
         },
 
         resetContainer: function() {
+            console.log("this.$el:", this.$el);
             this.$el.html(this.template({email: "blah", password:"blah"}));
+            this.$el.append("<div class='clearfix'></div>");
         },
 
         close: function() {
@@ -65,6 +70,7 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
             _.each(this.childViews, function(childView) {
                 childView.remove();
             });
+            this.mainPanelView.close();
         },
 
         populateChildViews: function() {
@@ -77,6 +83,14 @@ function($, Backbone, template, header_template, MapsList, MapsListView) {
             $("#logout").on("click", function(e) {
                 window.location = "/logout";
             });
+        },
+
+        editMap: function(id) {
+            if (this.mainPanelView){
+                this.mainPanelView.close();
+            }
+            var view = new AdminMain({map_id: id});
+            this.mainPanelView = view;
         }
     });
 

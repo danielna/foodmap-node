@@ -10,7 +10,7 @@ function($, Backbone, map_template) {
 
         events: {
             "click .map-name": "loadMap",
-            "click .map-edit": "editListing",
+            "click .map-edit": "editMap",
             "click .map-delete": "deleteListing"
         },
 
@@ -27,12 +27,11 @@ function($, Backbone, map_template) {
             }, this);
         },
 
-        editListing: function(e) {
+        editMap: function(e) {
             e.preventDefault();
+            var id = $(e.currentTarget).parents(".map-panel-item").attr("data-map-id");
 
-            // var id = $(e.currentTarget).parents("li").attr("data-id");
-
-            // window.location = "/#/admin/" + id;
+            this.trigger("editMap", id);
         },
 
         deleteListing: function(e) {

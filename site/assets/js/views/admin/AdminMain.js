@@ -6,7 +6,7 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
 
     foodmap.AdminMain = Backbone.View.extend({
 
-        el: "body",
+        el: "#right-panel",
 
         template: _.template(template),
 
@@ -14,8 +14,11 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
             "click .filter": "filterListHandler"
         },
 
-        initialize: function(model) {
-            console.log("Initialize");
+        initialize: function(options) {
+            console.log("Initialize adminMain");
+            var self = this;
+            this.map_id = options.map_id;
+
             this.resetContainer();
 
             this.childViews = [];
@@ -24,8 +27,8 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
             this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
 
-            if (model) {
-                this.model = model;
+            if (options.model) {
+                this.model = options.model;
             } else {
                 this.model = new Listing();
             }
@@ -34,11 +37,11 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
                 model: this.model
             });
 
-            if (model) {
+            if (options.model) {
                 this.setFormFields(model);
             }
 
-            this.collection = new MapItemList();
+            this.collection = new MapItemList({ 'map_id': this.map_id });
             this.adminListView = new AdminListView({
                 collection: this.collection
             });
@@ -67,7 +70,7 @@ function($, Backbone, Listing, MapItemList, AdminForm, AdminListView, template) 
         },
 
         resetContainer: function() {
-            this.$app_container = this.$el.find(".app-container");
+            this.$app_container = this.$el;
             this.$app_container.html(this.template);
         },
 
