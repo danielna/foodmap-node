@@ -24,9 +24,13 @@ function($, Backbone, MapItemList, MapView, ListingContainerView, TagsView, Map,
             this.model = new Map({ 'map_id': this.map_id });
             this.model.fetch({
                 reset: true,
-                success: function(){
+                success: function(model){
                     self.resetContainer();
                     self.setChildViews();
+
+                    // ToDo: this is not the best SEO decision.
+                    // Might need a refactor where you render the entire map page (including head) via a template.
+                    $(document).attr("title", model.get("name") + " | MAPEATER");
                 }
             });
         },
