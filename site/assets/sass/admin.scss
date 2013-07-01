@@ -8,12 +8,11 @@ body {
 .admin-eateries {
     display: block;
     position: relative;
-    width: 900px;
+    width: 100%;
     background-color: #fff;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     @include box-sizing(border-box);
-    border: 2px solid $color-darkgray;
     h1 {
         text-align: center;
         margin: 20px 0;
@@ -42,7 +41,6 @@ body {
         textarea {
             height: 200px;
         }
-        
         &.group {
             margin-top: 5px;
             span {

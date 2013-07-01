@@ -43,26 +43,25 @@ body {
 .admin-eateries {
   display: block;
   position: relative;
-  width: 900px;
+  width: 100%;
   background-color: #fff;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 2px solid #adadad;
 }
-/* line 17, ../sass/admin.scss */
+/* line 16, ../sass/admin.scss */
 .admin-eateries h1 {
   text-align: center;
   margin: 20px 0;
 }
-/* line 20, ../sass/admin.scss */
+/* line 19, ../sass/admin.scss */
 .admin-eateries h1.top {
   margin-top: 0;
 }
 
-/* line 26, ../sass/admin.scss */
+/* line 25, ../sass/admin.scss */
 .form, .eateries-list {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -73,7 +72,7 @@ body {
   padding: 20px;
 }
 
-/* line 34, ../sass/admin.scss */
+/* line 33, ../sass/admin.scss */
 #add-listing div {
   display: block;
   position: relative;
@@ -82,34 +81,34 @@ body {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
-/* line 39, ../sass/admin.scss */
+/* line 38, ../sass/admin.scss */
 #add-listing div input, #add-listing div textarea {
   width: 500px;
 }
-/* line 42, ../sass/admin.scss */
+/* line 41, ../sass/admin.scss */
 #add-listing div textarea {
   height: 200px;
 }
-/* line 46, ../sass/admin.scss */
+/* line 44, ../sass/admin.scss */
 #add-listing div.group {
   margin-top: 5px;
 }
-/* line 48, ../sass/admin.scss */
+/* line 46, ../sass/admin.scss */
 #add-listing div.group span {
   display: block;
   font-weight: bold;
   font-style: italic;
   margin-bottom: 5px;
 }
-/* line 54, ../sass/admin.scss */
+/* line 52, ../sass/admin.scss */
 #add-listing div.group > div {
   padding-left: 10px;
 }
-/* line 57, ../sass/admin.scss */
+/* line 55, ../sass/admin.scss */
 #add-listing div.group label {
   width: 140px;
 }
-/* line 62, ../sass/admin.scss */
+/* line 60, ../sass/admin.scss */
 #add-listing label {
   display: inline-block;
   position: relative;
@@ -117,13 +116,13 @@ body {
   font-weight: bold;
 }
 
-/* line 70, ../sass/admin.scss */
+/* line 68, ../sass/admin.scss */
 .list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 74, ../sass/admin.scss */
+/* line 72, ../sass/admin.scss */
 .list li {
   display: block;
   position: relative;
@@ -136,32 +135,32 @@ body {
   background-color: #cdf1ff;
   margin-bottom: 5px;
 }
-/* line 83, ../sass/admin.scss */
+/* line 81, ../sass/admin.scss */
 .list li div {
   display: block;
   position: relative;
 }
-/* line 86, ../sass/admin.scss */
+/* line 84, ../sass/admin.scss */
 .list li div.name {
   font-size: 16px;
   display: inline-block;
 }
-/* line 90, ../sass/admin.scss */
+/* line 88, ../sass/admin.scss */
 .list li div.slide {
   display: none;
 }
-/* line 93, ../sass/admin.scss */
+/* line 91, ../sass/admin.scss */
 .list li div.description h2 {
   font-size: 14px;
   margin: 5px 0;
 }
-/* line 98, ../sass/admin.scss */
+/* line 96, ../sass/admin.scss */
 .list li .label {
   font-weight: bold;
   margin-right: 10px;
 }
 
-/* line 105, ../sass/admin.scss */
+/* line 103, ../sass/admin.scss */
 .options {
   float: right;
 }
