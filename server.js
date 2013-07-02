@@ -27,6 +27,7 @@ app.configure( function() {
     app.use(app.router);
     //Show all errors in development
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    app.set('port', process.env.PORT || 4711);
 });
 
 
@@ -215,7 +216,6 @@ app.get('/logout', ensureAuthenticated(), function(req, res){
 
 function ensureAuthenticated() {
     return function(req, res, next) {
-        console.log("req.isAuthenticated():", req.isAuthenticated());
         if (req.isAuthenticated()) {
             next();
         } else {
@@ -396,17 +396,7 @@ app.get( '/api/maps/:id/listings', ensureAuthenticated(), function( request, res
 });
 
 
-
-
 //Start server
-var port = 4711;
-app.listen( port, function() {
-    console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
+app.listen( app.get('port'), function() {
+    console.log( 'Express server listening on port %d in %s mode', app.get('port'), app.settings.env );
 });
-
-
-// db.maps.find().pretty()
-// db.listings.update({ tags: "BestOf" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000004") } }, { multi: true })
-// db.listings.update({ tags: "Pizza" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000005") } }, { multi: true })
-// db.listings.update({ tags: "Burgers" }, { $set: { map_id: ObjectId("51d1a38ad5e8f2390b000006") } }, { multi: true })
-// db.listings.find( { $or: [ {tags:"BestOf"}, {tags:"Burgers"}, {tags:"Pizza"} ] }).pretty()
