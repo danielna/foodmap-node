@@ -7,8 +7,7 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User) {
     foodmap.Router = Backbone.Router.extend({
 
         routes: {
-            '': 'splash',
-            'home': 'home',
+            '': 'home',
             'map/:id': 'map',
             'admin': 'admin',
             'admin/:id': 'adminEdit',

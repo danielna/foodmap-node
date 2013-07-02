@@ -15,6 +15,9 @@ var app = express(),
 // Configure server
 app.configure( function() {
     app.use(express.static( path.join( application_root, 'site') ));
+    // app.set('view engine', 'ejs');
+    app.set('views', __dirname + '/views');
+    app.engine('html', require('ejs').renderFile);
     app.use(express.cookieParser());
     app.use(express.bodyParser());
     app.use(express.session({ secret: 'eat maps' }));
@@ -187,12 +190,22 @@ passport.use(new LocalStrategy(
   }
 ));
 
+
+
+
+
+
+
+app.get('/', ensureAuthenticated(), function(req, res) {
+    res.render("index.html");
+});
+
 app.post('/login',
   passport.authenticate('local'),
   function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    res.redirect('/#/home');
+    res.redirect('/');
 });
 
 app.get('/logout', ensureAuthenticated(), function(req, res){
@@ -202,16 +215,14 @@ app.get('/logout', ensureAuthenticated(), function(req, res){
 
 function ensureAuthenticated() {
     return function(req, res, next) {
+        console.log("req.isAuthenticated():", req.isAuthenticated());
         if (req.isAuthenticated()) {
             next();
         } else {
-            res.redirect('/');
+            res.render("splash.html");
         }
     };
 }
-
-
-
 
 // Routes
 app.get( '/api', ensureAuthenticated(), function( request, response ) {
