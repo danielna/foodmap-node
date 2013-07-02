@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain", "models/User"],
+define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain", "models/User", "views/home/HeaderView"],
 
-function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User) {
+function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, HeaderView) {
 
     var foodmap = foodmap || {};
 
@@ -40,12 +40,11 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User) {
                 this.closeCurrentView();
             }
             this.user = new User();
-            this.user.fetch({
-                success: function(response) {
-                    var view = new Home(response);
-                    self.setCurrentView(view);
-                }
+            var view = new HeaderView({
+                model: this.user
             });
+
+            this.user.fetch();
 
         },
 

@@ -61,7 +61,7 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
         },
 
         resetContainer: function() {
-            this.$el.html(this.template({email: "email", password:"pw"}));
+            // this.$el.html(this.template({email: "email", password:"pw"}));
             this.$el.append("<div class='clearfix'></div>");
         },
 
@@ -78,8 +78,8 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
             var self = this;
             this.$el.html(this.template( this.user.toJSON() ));
             // is this a hack?  yup.
-            var headerTemplate = _.template(header_template);
-            $("body").prepend( headerTemplate( this.user.toJSON() ));
+            // var headerTemplate = _.template(header_template);
+            // $("body").prepend( headerTemplate( this.user.toJSON() ));
 
             $("#logout").on("click", function(e) {
                 window.location = "/logout";

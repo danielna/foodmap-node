@@ -7,13 +7,29 @@
     <title>MAPEATER | om nom nom</title>
     <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="assets/css/home.css">
 </head>
 <body>
     <div class="app-container">
+      <header id='title-bar'>
+      </header>
+
+      <article id="left-panel">
+          <a href="javascript:;" id="home">Home</a>
+          <h2>Maps</h2>
+          <div id="maps-list">
+          </div>
+      </article>
+
+
+      <article id="right-panel">
+          <!-- initial messaging -->
+      </article>
     </div>
 
     <script data-main="/assets/js/foodmap.init.js" src="assets/js/lib/require.js"></script>
 
+    <!--
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-38929037-1']);
@@ -24,7 +40,8 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    </script>
+    </script> 
+    -->
 
 </body>
 </html>

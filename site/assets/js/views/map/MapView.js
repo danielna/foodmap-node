@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "infobox", "foodmap.globals"],
+define(["jquery", "backbone", "infobox", "foodmap.globals", "gmaps"],
 
 function($, Backbone, _InfoBox, _globals) {
     //Todo: Figure out why Infobox doesnt work when mapped to local variable "Infobox"
