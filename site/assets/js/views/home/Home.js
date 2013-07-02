@@ -11,7 +11,9 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
 
         template: _.template(template),
 
-        events: {},
+        events: {
+            "click #home": "loadInitialState"
+        },
 
         initialize: function(user) {
             this.resetContainer();
@@ -59,8 +61,7 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
         },
 
         resetContainer: function() {
-            console.log("this.$el:", this.$el);
-            this.$el.html(this.template({email: "blah", password:"blah"}));
+            this.$el.html(this.template({email: "email", password:"pw"}));
             this.$el.append("<div class='clearfix'></div>");
         },
 
@@ -85,8 +86,11 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
             });
         },
 
+        loadInitialState: function() {
+        },
+
         editMap: function(id) {
-            
+
             if (this.mainPanelView){
                 this.mainPanelView.close();
             }
