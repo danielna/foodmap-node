@@ -7,11 +7,7 @@ function($, Backbone) {
     foodmap.User = Backbone.Model.extend({
 
         urlRoot: function(){
-            if (this.isNew()){
-              return '/api/users';
-            } else {
-              return '/api/users' + this.id;
-            }
+            return '/api/users';
         },
 
         idAttribute: "_id",
