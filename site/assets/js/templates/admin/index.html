@@ -1,18 +1,23 @@
 <link rel="stylesheet" type="text/css" href="assets/css/admin.css">
 
 <article class="admin-eateries">
-    <h1 class="top"><%= name %></h1>
-    <section class="form">
-        <form id="add-listing" action="#">
-        </form>
-    </section>
+    <div class="wrapper">
+        <h1>
+            <%= name %> has <span class="count"></span> listings.
+        </h1>
 
-    <h1>List [Count: <span class="count"></span>]</h1>
-    <div class="container-filters">
-        <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> |
-        <a href="javascript:;" class="filter date-created">Sort by Created Date</a> |
-        <a href="javascript:;" class="filter alpha">Sort Alphabetically</a>
-    </div>
+        <section class="form">
+            <form id="add-listing" action="#">
+            </form>
+        </section>
+
+        <div class="container-filters">
+            <a href="javascript:;" class="filter date-modified">Sort by Modified Date</a> |
+            <a href="javascript:;" class="filter date-created">Sort by Created Date</a> |
+            <a href="javascript:;" class="filter alpha">Sort Alphabetically</a>
+        </div>
+
         <ul class="list">
         </ul>
+    </div>
 </article>

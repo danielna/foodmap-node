@@ -109,3 +109,10 @@ a.hideshow {
     background-color: $color-lightgray;
     @include box-sizing(border-box);
 }
+
+.wrapper {
+    display: block;
+    position: relative;
+    @include box-sizing(border-box);
+    padding: 20px;
+}

@@ -11,11 +11,10 @@ body {
     width: 100%;
     background-color: #fff;
     margin: 0px auto;
-    padding: 20px;
     @include box-sizing(border-box);
     h1 {
         text-align: center;
-        margin: 20px 0;
+        margin: 0 0 20px;
         &.top {
             margin-top: 0;
         }
@@ -29,6 +28,12 @@ body {
     margin-top: 10px;
     padding: 20px;
 }
+
+.form {
+    display: none;
+    margin-bottom: 20px;
+}
+
 #add-listing {
     div {
         display: block;
