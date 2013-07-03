@@ -90,15 +90,6 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             console.log("RESET");
             var that = this;
             Backbone.history.navigate("/admin/map/" + this.map_id, true);
-            // this.$form[0].reset();
-            // this.collection.fetch({
-            //     reset: true,
-            //     success: function() {
-            //         that.updateCount();
-            //         that.adminListView.render();
-            //         that.trigger("resetAdminRoute");
-            //     }
-            // });
         },
 
         updateCount: function() {
