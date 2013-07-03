@@ -201,7 +201,7 @@ app.get('/', ensureAuthenticated(), function(req, res) {
     res.render("index.html");
 });
 
-app.get('/map', function(req, res) {
+app.get('/map/', function(req, res) {
     res.render("map.html");
 });
 
