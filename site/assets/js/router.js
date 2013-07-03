@@ -9,7 +9,7 @@ function($, Backbone, MapItemList, Splash, Home, AdminMain, User, HeaderView, Ma
         routes: {
             '': 'home',
             'admin/map/:id': 'admin',
-            'admin/map/:map_id/listing/:listing_id': 'admin',
+            'admin/map/:mapId/listing/:listingId': 'admin',
             '*actions': 'default'
         },
 
