@@ -28,7 +28,7 @@ define('gmaps', ['async!http://maps.googleapis.com/maps/api/js?key=AIzaSyDiA6472
     return window.google.maps;
 });
 
-require(["jquery", "underscore", "backbone", "mapRouter"],
+require(["jquery", "underscore", "backbone", "mapRouter", "gmaps"],
     function($, _, Backbone, Router) {
 
         var foodmap = foodmap || {};
