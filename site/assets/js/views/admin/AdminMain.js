@@ -18,6 +18,7 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
         initialize: function(options) {
             console.log("Initialize adminMain");
             var self = this;
+            this.$app_container = this.$el;
             this.map_id = options.map_id;
 
             this.map = new Map({ 'map_id': this.map_id });
@@ -34,7 +35,6 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             var self = this;
             this.childViews = [];
 
-            this.$form = this.$app_container.find("#add-listing");
             this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
 
@@ -42,6 +42,8 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
                 this.model = new Listing( {_id: options.listingId} );
                 this.model.fetch({
                     success: function(res) {
+                        // todo: fix this arbitrary call
+                        $(".form").show();
                         self.setFormFields(res);
                     }
                 });
@@ -64,6 +66,9 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             this.childViews.push(this.adminForm);
             this.childViews.push(this.adminListView);
 
+            this.$form = this.$app_container.find("#add-listing");
+            this.$form_container = this.$app_container.find(".form");
+
             this.listenTo(this.adminForm, 'addListing', this.resetView);
             this.listenTo(this.adminListView, 'deleteListing', this.resetView);
             this.listenTo(this.collection, 'reset', this.updateCount);
@@ -82,7 +87,6 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
         },
 
         resetContainer: function() {
-            this.$app_container = this.$el;
             this.$app_container.html(this.template(this.map.toJSON()));
         },
 
