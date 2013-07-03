@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain", "models/User", "views/home/HeaderView", "views/home/MapsListView", "collections/MapsList", "views/home/InitialView"],
+define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/admin/AdminMain", "models/User", "views/home/HeaderView", "views/home/MapsListView", "collections/MapsList", "views/home/InitialView"],
 
-function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, HeaderView, MapsListView, MapsList, InitialView) {
+function($, Backbone, MapItemList, Splash, Home, AdminMain, User, HeaderView, MapsListView, MapsList, InitialView) {
 
     var foodmap = foodmap || {};
 
@@ -8,7 +8,6 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
 
         routes: {
             '': 'home',
-            'map/:id': 'map',
             'admin/map/:id': 'admin',
             'admin/map/:map_id/listing/:listing_id': 'admin',
             '*actions': 'default'
@@ -67,15 +66,6 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
             // Todo: this shouldn't be in the router.
             // But where does it go?  I have no idea.
             this.resizeWindow();
-        },
-
-        map: function(id) {
-            console.log("main");
-            if (this.currentView) {
-                this.closeCurrentView();
-            }
-            var view = new MapMain({map_id: id});
-            this.setCurrentView(view);
         },
 
         admin: function(id, listingId) {

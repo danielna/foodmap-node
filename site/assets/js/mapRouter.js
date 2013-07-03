@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "collections/MapItemList", "views/init/Splash", "views/home/Home", "views/map/Main", "views/admin/AdminMain", "models/User", "views/home/HeaderView", "views/home/MapsListView", "collections/MapsList", "views/home/InitialView"],
+define(["jquery", "backbone", "views/map/Main"],
 
-function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, HeaderView, MapsListView, MapsList, InitialView) {
+function($, Backbone, MapMain) {
 
     var foodmap = foodmap || {};
 
@@ -12,23 +12,6 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
 
         initialize: function() {
             var self = this;
-
-            this.collection = new MapsList();
-            this.currentView = null;
-
-            if (this.currentView) {
-                this.closeCurrentView();
-            }
-            this.user = new User();
-
-            new HeaderView({
-                model: this.user
-            });
-
-            new MapsListView({
-                collection: this.collection
-            });
-
             Backbone.history.start();
         },
 
