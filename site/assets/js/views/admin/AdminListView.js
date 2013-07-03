@@ -9,7 +9,6 @@ function($, Backbone, AdminListing) {
         el: "ul.list",
 
         events: {
-            "click .model-edit": "editListing",
             "click .model-delete": "deleteListing",
             "click .hideShow": "toggleListingVisible"
         },
@@ -70,7 +69,7 @@ function($, Backbone, AdminListing) {
 
             var id = $(e.currentTarget).parents("li").attr("data-id");
 
-            window.location = "/#/admin/" + id;
+            window.location = "/#/admin/listing/" + id;
         },
 
         deleteListing: function(e) {

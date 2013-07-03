@@ -30,27 +30,8 @@ function($, Backbone, map_template) {
         editMap: function(e) {
             e.preventDefault();
             var id = $(e.currentTarget).parents(".map-panel-item").attr("data-map-id");
-
-            this.trigger("editMap", id);
-        },
-
-        deleteListing: function(e) {
-            e.preventDefault();
-            // var id = $(e.currentTarget).parents("li").attr("data-id"),
-            //     model = this.collection.get(id),
-            //     that = this;
-
-            // if ( confirm("Are you sure you want to delete " + model.get("name") + "?") ){
-            //     model.destroy({
-            //         success: function(response) {
-            //             console.log(response.get("name") + " deleted.");
-            //             that.trigger("deleteListing");
-            //         },
-            //         error: function(respose) {
-            //             console.error("Error deleting: " + response.get("name"));
-            //         }
-            //     });
-            // }
+            window.location = "#/admin/map/" + id;
+            // this.trigger("editMap", id);
         },
 
         loadMap: function(e) {

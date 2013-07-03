@@ -11,7 +11,8 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
         template: _.template(template),
 
         events: {
-            "click .filter": "filterListHandler"
+            "click .filter": "filterListHandler",
+            "click .model-edit": "editListing"
         },
 
         initialize: function(options) {
@@ -120,6 +121,14 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             _.each(this.childViews, function(childView) {
                 childView.remove();
             });
+        },
+
+        editListing: function(e) {
+            e.preventDefault();
+
+            var id = $(e.currentTarget).parents("li").attr("data-id");
+
+            window.location = "/#/admin/map/" + this.map_id + "/listing/" + id;
         }
 
     });
