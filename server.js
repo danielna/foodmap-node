@@ -225,11 +225,7 @@ function ensureAuthenticated() {
 }
 
 // Routes
-app.get( '/api', ensureAuthenticated(), function( request, response ) {
-    response.send( 'Library API is running' );
-});
 
-//// LISTINGS
 // Get all listings
 app.get( '/api/listings', ensureAuthenticated(), function( request, response ) {
     return Listing.find( function( err, listings ) {
