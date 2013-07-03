@@ -34,6 +34,28 @@ body {
     margin-bottom: 20px;
 }
 
+.map-details {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    background-color: $color-lightgray;
+    border: 1px solid $color-darkgray;
+    margin-bottom: 10px;
+    @include box-sizing(border-box);
+    .label {
+        display: inline-block;
+        font-weight: bold;
+    }
+    .input {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .show-hide-container {
+        display: none;
+    }
+}
+
 #add-listing {
     div {
         display: block;

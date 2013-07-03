@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "models/Listing", "models/Map", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
+define(["jquery", "backbone", "models/Listing", "models/Map", "collections/MapItemList", "views/admin/AdminForm", "views/admin/AdminListView", "views/admin/MapDetailsView", "text!templates/admin/index.html", "text!/assets/css/map.css"],
 
-function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, template) {
+function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, MapDetailsView, template) {
 
     var foodmap = foodmap || {};
 
@@ -22,6 +22,7 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             this.map_id = options.map_id;
 
             this.map = new Map({ 'map_id': this.map_id });
+
             this.map.fetch({
                 reset: true,
                 success: function() {
@@ -53,6 +54,10 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
 
             this.adminForm = new AdminForm({
                 model: this.model
+            });
+
+            this.mapDetails = new MapDetailsView({
+                model: this.map
             });
 
             this.collection = new MapItemList({ 'map_id': this.map_id });
