@@ -201,6 +201,10 @@ app.get('/', ensureAuthenticated(), function(req, res) {
     res.render("index.html");
 });
 
+app.get('/map', function(req, res) {
+    res.render("map.html");
+});
+
 app.post('/login',
   passport.authenticate('local'),
   function(req, res) {
@@ -371,7 +375,7 @@ app.get( '/api/maps', ensureAuthenticated(), function( request, response ) {
     });
 });
 // Get a single map by id
-app.get( '/api/maps/:id', ensureAuthenticated(), function( request, response ) {
+app.get( '/api/maps/:id', function( request, response ) {
     return Map.findById( request.params.id, function( err, res ) {
         if( !err ) {
             return response.send( res );
@@ -381,7 +385,7 @@ app.get( '/api/maps/:id', ensureAuthenticated(), function( request, response ) {
     });
 });
 // Get a single map by id
-app.get( '/api/maps/:id/listings', ensureAuthenticated(), function( request, response ) {
+app.get( '/api/maps/:id/listings', function( request, response ) {
     return Listing.find( {"map_id": request.params.id} , function( err, res ) {
         if( !err ) {
             return response.send( res );
