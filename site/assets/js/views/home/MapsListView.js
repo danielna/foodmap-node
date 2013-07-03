@@ -1,17 +1,18 @@
-define(["jquery", "backbone", "text!templates/home/mapsListing.html"],
+define(["jquery", "backbone", "text!templates/home/mapsListing.html", "text!templates/home/leftMenu.html"],
 
-function($, Backbone, map_template) {
+function($, Backbone, map_template, left_template) {
 
     var foodmap = foodmap || {};
 
     foodmap.MapsListView = Backbone.View.extend({
 
-        el: "#maps-list",
+        el: "#left-panel",
 
         events: {
             "click .map-name": "loadMap",
             "click .map-edit": "editMap",
-            "click .map-delete": "deleteListing"
+            "click .map-delete": "deleteListing",
+            "click #home": "home"
         },
 
         initialize: function() {
@@ -20,10 +21,14 @@ function($, Backbone, map_template) {
         },
 
         render: function() {
-            this.$el.html("");
-            var mapTemplate = _.template(map_template);
+            var panelTemplate = _.template(left_template),
+                mapTemplate = _.template(map_template);
+
+            this.$el.html(panelTemplate);
+            this.$mapsList = this.$el.find("#maps-list");
+
             this.collection.each(function(map) {
-                this.$el.append( mapTemplate(map.toJSON()) );
+                this.$mapsList.append( mapTemplate(map.toJSON()) );
             }, this);
         },
 
@@ -39,6 +44,10 @@ function($, Backbone, map_template) {
             var id = $(e.currentTarget).parents(".map-panel-item").attr("data-map-id");
 
             window.open("/#/map/" + id, '_blank');
+        },
+
+        home: function() {
+            Backbone.history.navigate("/", true);
         }
 
     });

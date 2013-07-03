@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "text!templates/home/home.html", "text!templates/home/header.html", "collections/MapsList", "views/home/MapsListView", "views/admin/AdminMain"],
+define(["jquery", "backbone", "text!templates/home/header.html", "collections/MapsList", "views/home/MapsListView", "views/admin/AdminMain"],
 
-function($, Backbone, template, header_template, MapsList, MapsListView, AdminMain) {
+function($, Backbone, header_template, MapsList, MapsListView, AdminMain) {
 
     var foodmap = foodmap || {};
 
@@ -8,8 +8,6 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
 
         // GAH refactor this just to be body.  this won't work.
         el: ".app-container",
-
-        template: _.template(template),
 
         events: {
             "click #home": "loadInitialState"
@@ -61,7 +59,6 @@ function($, Backbone, template, header_template, MapsList, MapsListView, AdminMa
         },
 
         resetContainer: function() {
-            // this.$el.html(this.template({email: "email", password:"pw"}));
             this.$el.append("<div class='clearfix'></div>");
         },
 

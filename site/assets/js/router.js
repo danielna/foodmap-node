@@ -17,6 +17,7 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
 
         initialize: function() {
             var self = this;
+
             this.collection = new MapsList();
             this.currentView = null;
 
@@ -32,10 +33,6 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
             new MapsListView({
                 collection: this.collection
             });
-
-            $("#home").on("click", function() {
-                self.navigate("/", {trigger:"true"});
-            })
 
             Backbone.history.start();
         },
