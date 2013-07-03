@@ -74,7 +74,7 @@ $title-bar-height: 50px;
     position: absolute;
     top: $title-bar-height;
     left: 240px;
-    padding: 10px 20px;
+    padding: 0;
     background-color: $color-darkgray;
     @include box-sizing(border-box);
     overflow-y: auto;

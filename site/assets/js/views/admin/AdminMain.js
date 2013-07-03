@@ -31,14 +31,20 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
         },
 
         createChildViews: function(options) {
+            var self = this;
             this.childViews = [];
 
             this.$form = this.$app_container.find("#add-listing");
             this.$count = this.$app_container.find(".count");
             this.$body = this.$el;
 
-            if (options.model) {
-                this.model = options.model;
+            if (options.listingId) {
+                this.model = new Listing( {_id: options.listingId} );
+                this.model.fetch({
+                    success: function(res) {
+                        self.setFormFields(res);
+                    }
+                });
             } else {
                 this.model = new Listing();
             }
@@ -46,10 +52,6 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
             this.adminForm = new AdminForm({
                 model: this.model
             });
-
-            if (options.model) {
-                this.setFormFields(model);
-            }
 
             this.collection = new MapItemList({ 'map_id': this.map_id });
             this.adminListView = new AdminListView({
@@ -87,15 +89,16 @@ function($, Backbone, Listing, Map, MapItemList, AdminForm, AdminListView, templ
         resetView: function() {
             console.log("RESET");
             var that = this;
-            this.$form[0].reset();
-            this.collection.fetch({
-                reset: true,
-                success: function() {
-                    that.updateCount();
-                    that.adminListView.render();
-                    that.trigger("resetAdminRoute");
-                }
-            });
+            Backbone.history.navigate("/admin/map/" + this.map_id, true);
+            // this.$form[0].reset();
+            // this.collection.fetch({
+            //     reset: true,
+            //     success: function() {
+            //         that.updateCount();
+            //         that.adminListView.render();
+            //         that.trigger("resetAdminRoute");
+            //     }
+            // });
         },
 
         updateCount: function() {

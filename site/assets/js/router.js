@@ -9,9 +9,8 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
         routes: {
             '': 'home',
             'map/:id': 'map',
-            'admin': 'admin',
-            'admin/map/:id': 'adminMap',
-            'admin/map/:map_id/listing/:listing_id': 'adminEdit',
+            'admin/map/:id': 'admin',
+            'admin/map/:map_id/listing/:listing_id': 'admin',
             '*actions': 'default'
         },
 
@@ -60,7 +59,6 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
             var view = new InitialView();
             this.setCurrentView(view);
 
-            console.log("this.user:", this.user);
             this.user.fetch();
             this.collection.fetch({
                 reset: true
@@ -80,46 +78,13 @@ function($, Backbone, MapItemList, Splash, Home, MapMain, AdminMain, User, Heade
             this.setCurrentView(view);
         },
 
-        admin: function() {
+        admin: function(id, listingId) {
             console.log("admin");
             if (this.currentView) {
                 this.closeCurrentView();
             }
-            var view = new AdminMain();
+            var view = new AdminMain({"map_id": id, "listingId": listingId});
             this.setCurrentView(view);
-        },
-
-        adminMap: function(id) {
-            console.log("adminMap");
-            if (this.currentView) {
-                this.closeCurrentView();
-            }
-            var view = new AdminMain({"map_id": id});
-            this.setCurrentView(view);
-        },
-
-        adminEdit: function(map_id, listing_id) {
-            console.log("edit");
-            var self = this,
-                mapItemList = new MapItemList({ 'map_id': map_id });
-
-            mapItemList.fetch({
-                success: function() {
-                    var listing = mapItemList.get(listing_id);
-                    if (self.currentView) {
-                        self.closeCurrentView();
-                    }
-                    var view = new AdminMain(listing);
-                    self.setCurrentView(view);
-
-                    self.listenTo(view, "resetAdminRoute", function() {
-                        this.navigate("admin", { trigger: true });
-                    });
-                },
-                error: function() {
-                    console.error("Something went wrong with the collection fetch.");
-                }
-            });
         },
 
         setCurrentView: function(view){

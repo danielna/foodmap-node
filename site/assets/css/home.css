@@ -120,7 +120,7 @@ form label {
   position: absolute;
   top: 50px;
   left: 240px;
-  padding: 10px 20px;
+  padding: 0;
   background-color: #adadad;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
